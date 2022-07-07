@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">week2_developer_app</string>
+    <string name="kakao_app_key">앱 키</string>
 </resources>
