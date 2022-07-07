@@ -38,7 +38,7 @@
                     android:scheme="kakao{d0460decc59c9f319e6315af71a94335}" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

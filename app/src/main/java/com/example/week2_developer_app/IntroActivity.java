@@ -1,9 +1,11 @@
 package com.example.week2_developer_app;
 
-import android.media.MediaSession2;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +28,19 @@ public class IntroActivity extends AppCompatActivity {
                     accountLogin();
                 }
             }
+        });
+    }
+
+    public void login(){
+        String TAG = "login()";
+        UserApiClient.getInstance().loginWithKakaoTalk(IntroActivity.this,(oAuthToken, error) -> {
+            if (error != null) {
+                Log.e(TAG, "로그인 실패", error);
+            } else if (oAuthToken != null) {
+                Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
+                getUserInfo();
+            }
+            return null;
         });
     }
 }
