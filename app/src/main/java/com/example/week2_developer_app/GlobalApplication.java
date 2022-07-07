@@ -12,6 +12,6 @@ public class GlobalApplication extends Application {
         instance = this;
 
         // 네이티브 앱 키로 초기화
-        KakaoSdk.init(this, "{d0460decc59c9f319e6315af71a94335}");
+        KakaoSdk.init(this, "d0460decc59c9f319e6315af71a94335");
     }
 }
