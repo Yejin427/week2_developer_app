@@ -8,21 +8,55 @@ import androidx.fragment.app.FragmentActivity;
 import java.util.ArrayList;
 import com.google.android.material.tabs.TabLayout;
 
+
+
+
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.util.Base64;
+import android.util.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
 public class MainActivity extends FragmentActivity {
 
     TabLayout tabs;
 
     FragmentProject fragmentProject;
-//    FragmentBoard fragmentBoard;
+    FragmentBoard fragmentBoard;
 //    FragmentChat fragmentChat;
+
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getHashKey();
         fragmentProject = new FragmentProject();
-//        fragmentBoard = new FragmentBoard();
+        fragmentBoard = new FragmentBoard();
 //        fragmentChat = new FragmentChat();
 
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragmentProject).commit();
@@ -40,7 +74,7 @@ public class MainActivity extends FragmentActivity {
                 if(position == 0)
                     selected = fragmentProject;
                 else if(position == 1)
-                    selected = fragmentProject;
+                    selected = fragmentBoard;
                 else if(position == 2)
                     selected = fragmentProject;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();

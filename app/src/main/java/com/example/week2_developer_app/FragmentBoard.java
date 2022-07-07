@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.week2_developer_app.databinding.FragmentBoardcontentsBinding;
-import com.example.week2_developer_app.databinding.FragmentboardBinding;
+
+import com.example.week2_developer_app.databinding.FragmentBoardBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,14 +57,14 @@ public class FragmentBoard extends Fragment {
 
         return json;
     }
-
     private void jsonParsing(String json) {
         try {
             JSONObject jsonObject = new JSONObject(json);
 
             JSONArray boardArray = jsonObject.getJSONArray("Board List");
+            boardList.clear();
 
-            int[] picarr = {R.drawable.scpc, R.drawable.mobis};
+            int[] picarr = {R.drawable.icon_add, R.drawable.icon_dot};
             for (int i = 0; i < boardArray.length(); i++) {
                 JSONObject boardObject = boardArray.getJSONObject(i);
 
@@ -80,18 +81,43 @@ public class FragmentBoard extends Fragment {
     @Override
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_board, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.boardlistview);
-        recyclerView.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
-        searchView = (SearchView) rootView.findViewById(R.id.search_view);
+        View rootView = binding.getRoot();
+
+        binding.searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterBoard.getFilter().filter(newText);
+                binding.boardlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
+                binding.boardlistview.setAdapter(adapterBoard);
+                return false;
+            }
+        });
+
+        binding.refreshBoard.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(requireContext(), "Refeshed", Toast.LENGTH_SHORT).show();
+                jsonParsing(getJsonString());
+                adapterBoard = new AdapterBoard(boardList);
+                binding.boardlistview.setAdapter(adapterBoard);
+                binding.refreshBoard.setRefreshing(false);
+            }
+        });
+
+
+        binding.boardlistview.setHasFixedSize(true);
+        binding.boardlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
+
         adapterBoard = new AdapterBoard(boardList);
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refreshBoard);
+        binding.boardlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.boardlistview.setItemAnimator(new DefaultItemAnimator());
+        binding.boardlistview.setAdapter(adapterBoard);
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapterBoard);
 
         adapterBoard.setOnItemClicklistener(new OnPersonItemClickListener() {
             @Override
@@ -100,27 +126,6 @@ public class FragmentBoard extends Fragment {
             }
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapterBoard.getFilter().filter(newText);
-                binding.projectlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
-                binding.projectlistview.setAdapter(adapter);
-                return false;
-            }
-        });
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //새로고침 시 진행 동작
-            }
-        });
         return rootView;
     }
 

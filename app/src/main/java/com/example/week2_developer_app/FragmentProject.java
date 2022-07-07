@@ -39,6 +39,8 @@ public class FragmentProject extends Fragment {
 
     private FragmentProjectBinding binding;
 
+
+
     private String getJsonString()
     {
         String json = "";
@@ -123,7 +125,6 @@ public class FragmentProject extends Fragment {
             }
         });
 
-//        binding.searchView
         binding.projectlistview.setHasFixedSize(true);
         binding.projectlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 

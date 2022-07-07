@@ -38,13 +38,6 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
         return new ViewHolder(view,this);
     }
 
-    public void filterList(ArrayList<Project> filteredList){
-        projects = filteredList;
-        notifyDataSetChanged();
-    }
-
-
-
 
     @Override
     public Filter getFilter(){
@@ -54,7 +47,7 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
                 String charString = constraint.toString();
 
                 if(charString.isEmpty()) {
-                    projects_filtered = projects_list\;
+                    projects_filtered = projects_list;
                 } else {
                     ArrayList<Project> filteringList = new ArrayList<>();
                     for(Project project : projects_list) {
