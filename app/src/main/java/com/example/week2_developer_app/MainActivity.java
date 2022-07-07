@@ -12,19 +12,18 @@ public class MainActivity extends FragmentActivity {
 
     TabLayout tabs;
 
-    Fragment1 fragment1;
-    Fragment2 fragment2;
-    Fragment3 fragment3;
-    Fragment4 fragment4;
+    FragmentProject fragmentProject;
+    FragmentBoard fragmentBoard;
+    FragmentChat fragmentChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragment1 = new FragmentProject();
-        fragment2 = new FragmentBoard();
-        fragment3 = new FragmentChat();
+        fragmentProject = new FragmentProject();
+        fragmentBoard = new FragmentBoard();
+        fragmentChat = new FragmentChat();
 
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
@@ -39,11 +38,11 @@ public class MainActivity extends FragmentActivity {
                 int position = tab.getPosition();
                 Fragment selected = null;
                 if(position == 0)
-                    selected = fragment1;
+                    selected = fragmentProject;
                 else if(position == 1)
-                    selected = fragment2;
+                    selected = fragmentBoard;
                 else if(position == 2)
-                    selected = fragment3;
+                    selected = fragmentChat;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 
