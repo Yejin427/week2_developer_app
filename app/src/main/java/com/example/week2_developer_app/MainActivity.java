@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.week2_developer_app;
 
 import android.os.Bundle;
 
@@ -13,8 +13,8 @@ public class MainActivity extends FragmentActivity {
     TabLayout tabs;
 
     FragmentProject fragmentProject;
-    FragmentBoard fragmentBoard;
-    FragmentChat fragmentChat;
+//    FragmentBoard fragmentBoard;
+//    FragmentChat fragmentChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +22,10 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         fragmentProject = new FragmentProject();
-        fragmentBoard = new FragmentBoard();
-        fragmentChat = new FragmentChat();
+//        fragmentBoard = new FragmentBoard();
+//        fragmentChat = new FragmentChat();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, fragmentProject).commit();
 
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("홈"));
@@ -40,9 +40,9 @@ public class MainActivity extends FragmentActivity {
                 if(position == 0)
                     selected = fragmentProject;
                 else if(position == 1)
-                    selected = fragmentBoard;
+                    selected = fragmentProject;
                 else if(position == 2)
-                    selected = fragmentChat;
+                    selected = fragmentProject;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 

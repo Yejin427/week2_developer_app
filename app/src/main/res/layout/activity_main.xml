@@ -16,16 +16,13 @@
         android:elevation="1dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/cardview_light_background"
+        app:tabSelectedTextColor="@color/cardview_dark_background"
         app:tabTextColor="@color/cardview_dark_background" />
-
-
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tabs">
+        android:layout_height="match_parent">
     </FrameLayout>
 
 </RelativeLayout>

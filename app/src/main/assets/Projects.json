@@ -1,0 +1,24 @@
+{ "Projects" :
+  [
+      {
+      "id" : 1,
+      "title" : "개발같이해요, 개같이",
+      "content" : "초보 개발자를 위한 어플을 만듭니다",
+      "field" : "app",
+      "level" : "easy",
+      "headcount" : "2",
+      "language" : "java",
+      "time" : "7/6(수) ~ 7/13(수)"
+    },
+    {
+      "id" : 2,
+      "title" : "유니티 이용한 게임 만들기",
+      "content" : "유니티, C#을 이용해서 게임 만듭니다",
+      "field" : "game",
+      "level" : "easy",
+      "headcount" : "3",
+      "language" : "C#",
+      "time" : "7/6(수) ~ 7/13(수)"
+    }
+  ]
+}
