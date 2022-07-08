@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.kakao.sdk.user.UserApi;
@@ -20,6 +21,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import retrofit2.http.Url;
 
 public class IntroActivity extends AppCompatActivity {
@@ -44,8 +49,6 @@ public class IntroActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Log.d("str", userinfo.toString());
     }
 
     public void login(){
@@ -87,8 +90,37 @@ public class IntroActivity extends AppCompatActivity {
                     userinfo.add(user.getId().toString());
                     userinfo.add(user.getKakaoAccount().getProfile().getNickname());
                     userinfo.add(user.getKakaoAccount().getEmail());
+//                    userinfo.add(user.getKakaoAccount().getPhoneNumber());
+//                    userinfo.add(user.getKakaoAccount().getAgeRange().toString());
+//                    userinfo.add(user.getKakaoAccount().getGender().toString());
 
                     Log.d("str", userinfo.toString());
+
+                    LoginApi login =  RetrofitClient.getClient().create(LoginApi.class);
+                    LoginData data = new LoginData(userinfo.get(2));
+
+                    login.userLogin(data).enqueue(new Callback<LoginResponse>(){
+                        @Override
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            LoginResponse result = response.body();
+                            Toast.makeText(IntroActivity.this, result.getCode(), Toast.LENGTH_SHORT).show();
+                            if(result.getCode() == 200){
+                                Log.d("tag", "일치하는 아이디가 있습니다.");
+                                finish();
+                            }
+                            else{
+                                Log.d("tag", "일치하는 아이디가 없습니다.");
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
+                            Toast.makeText(IntroActivity.this, "로그인 에러발생", Toast.LENGTH_SHORT).show();
+                            Log.e("로그인 에러발생", t.getMessage());
+                            t.printStackTrace();
+                        }
+                    });
+
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
