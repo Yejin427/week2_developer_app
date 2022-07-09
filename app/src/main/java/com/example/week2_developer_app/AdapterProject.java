@@ -55,8 +55,8 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
                         if(project.gettitle().toLowerCase().contains(charString.toLowerCase()) ||
                                 project.getcontent().toLowerCase().contains(charString.toLowerCase()) ||
                                 project.getfield().toLowerCase().contains(charString.toLowerCase()) ||
-                                project.getlevel().toLowerCase().contains(charString.toLowerCase()) ||
-                                project.getheadcount().toLowerCase().contains(charString.toLowerCase()) ||
+                                Integer.toString(project.getlevel()).toLowerCase().contains(charString.toLowerCase()) ||
+                                Integer.toString(project.getheadcount()).toLowerCase().contains(charString.toLowerCase()) ||
                                 project.getlanguage().toLowerCase().contains(charString.toLowerCase()) ||
                                 project.gettime().toLowerCase().contains(charString.toLowerCase())
                         ) {
@@ -139,7 +139,6 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
         }
         void onBind(Project project) {
             title.setText(project.gettitle());
-            System.out.println("binding" + project.gettitle());
 
             String str = "분야 : " + project.getfield()
                     + " / 언어 : " + project.getlanguage()
@@ -147,8 +146,6 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
                     + " / 모집인원 : " + project.getheadcount() ;
 
             information.setText(str);
-            System.out.println("binding" + project.getcontent());
-
         }
     }
     public void setItems(ArrayList<Project> projects){

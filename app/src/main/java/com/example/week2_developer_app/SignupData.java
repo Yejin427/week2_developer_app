@@ -2,7 +2,7 @@ package com.example.week2_developer_app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class JoinData {
+public class SignupData {
 
     @SerializedName("userEmail")
     private String userEmail;
@@ -15,8 +15,11 @@ public class JoinData {
     @SerializedName("userAge")
     private int userAge;
 
-    @SerializedName("userPhone")
-    private String userPhone;
+    @SerializedName("userGender")
+    private String userGender;
+
+    @SerializedName("userPhonenum")
+    private String userPhonenum;
 
     @SerializedName("userLevel")
     private int userLevel;
@@ -27,12 +30,13 @@ public class JoinData {
     @SerializedName("userMsg")
     private String userMsg;
 
-    public JoinData(String userName, String userEmail, String userPwd, int userAge, String userPhone, int userLevel, String userField, String userMsg) {
+    public SignupData(String userEmail, String userName, int userAge, String userGender, String userPhonenum, String userField, int userLevel, String userMsg) {
 
         this.userName = userName;
         this.userEmail = userEmail;
         this.userAge = userAge;
-        this.userPhone = userPhone;
+        this.userGender = userGender;
+        this.userPhonenum = userPhonenum;
         this.userLevel = userLevel;
         this.userField = userField;
         this.userMsg = userMsg;

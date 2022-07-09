@@ -87,29 +87,31 @@ public class IntroActivity extends AppCompatActivity {
                 System.out.println("로그인 완료");
                 Log.i(TAG, user.toString());
                 {
-                    userinfo.add(user.getId().toString());
                     userinfo.add(user.getKakaoAccount().getProfile().getNickname());
                     userinfo.add(user.getKakaoAccount().getEmail());
-//                    userinfo.add(user.getKakaoAccount().getPhoneNumber());
-//                    userinfo.add(user.getKakaoAccount().getAgeRange().toString());
-//                    userinfo.add(user.getKakaoAccount().getGender().toString());
 
                     Log.d("str", userinfo.toString());
 
                     LoginApi login =  RetrofitClient.getClient().create(LoginApi.class);
-                    LoginData data = new LoginData(userinfo.get(2));
+                    LoginData data = new LoginData(userinfo.get(1));
 
                     login.userLogin(data).enqueue(new Callback<LoginResponse>(){
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                             LoginResponse result = response.body();
-                            Toast.makeText(IntroActivity.this, result.getCode(), Toast.LENGTH_SHORT).show();
+//
                             if(result.getCode() == 200){
                                 Log.d("tag", "일치하는 아이디가 있습니다.");
-                                finish();
+                                Toast.makeText(IntroActivity.this, userinfo.get(1)+"님 "+"환영합니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
                             }
                             else{
                                 Log.d("tag", "일치하는 아이디가 없습니다.");
+                                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                                intent.putExtra("name", userinfo.get(0));
+                                intent.putExtra("email", userinfo.get(1));
+                                startActivity(intent);
                             }
                         }
                         @Override
@@ -117,15 +119,18 @@ public class IntroActivity extends AppCompatActivity {
                             Toast.makeText(IntroActivity.this, "로그인 에러발생", Toast.LENGTH_SHORT).show();
                             Log.e("로그인 에러발생", t.getMessage());
                             t.printStackTrace();
+                            recreate();
                         }
                     });
 
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
                 }
             }
             return null;
         });
     }
+}
+
+interface OnItemClickListener {
+    void onItemClick(AdapterProject.ViewHolder holder, View v, int pos);
 }

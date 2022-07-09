@@ -2,7 +2,7 @@ package com.example.week2_developer_app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class SignupResponse {
 
     @SerializedName("code")
     private int code;

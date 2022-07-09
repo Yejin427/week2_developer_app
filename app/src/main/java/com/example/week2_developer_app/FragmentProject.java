@@ -4,6 +4,7 @@ package com.example.week2_developer_app;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentProject extends Fragment {
 
@@ -40,52 +46,25 @@ public class FragmentProject extends Fragment {
     private FragmentProjectBinding binding;
 
 
+    private void getProjectlist(){
 
-    private String getJsonString()
-    {
-        String json = "";
-        try {
-            InputStream is = getActivity().getAssets().open("Projects.json");
-            int fileSize = is.available();
-            byte[] buffer = new byte[fileSize];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        }
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-        return json;
-    }
-    private void jsonParsing(String json)
-    {
-        try{
-            projectlist = new ArrayList<>();
-            JSONObject jsonObject = new JSONObject(json);
+        projectlist.clear();
+        GetProject service = RetrofitClient.getClient().create(GetProject.class);
+        Call<List<Project>> call = service.getProject();
+        call.enqueue(new Callback<List<Project>>() {
+            @Override
+            public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
+                Log.d("response", response.body().toString());
+                projectlist.addAll(response.body());
 
-            JSONArray projectArray = jsonObject.getJSONArray("Projects");
-
-            for(int i=0; i<projectArray.length(); i++)
-            {
-                JSONObject obj = projectArray.getJSONObject(i);
-
-                Project project = new Project(
-                        obj.getInt("id"),
-                        obj.getString("title"),
-                        obj.getString("content"),
-                        obj.getString("field"),
-                        obj.getString("level"),
-                        obj.getString("headcount"),
-                        obj.getString("language"),
-                        obj.getString("time")
-                        );
-
-                projectlist.add(project);
+                adapter = new AdapterProject(projectlist);
+                binding.projectlistview.setAdapter(adapter);
+                binding.refreshProject.setRefreshing(false);
             }
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(Call<List<Project>> call, Throwable t) {
+            }
+        });
     }
 
     @Nullable
@@ -113,15 +92,8 @@ public class FragmentProject extends Fragment {
             @Override
             public void onRefresh() {
                 Toast.makeText(requireContext(), "Refeshed", Toast.LENGTH_SHORT).show();
-                jsonParsing(getJsonString());
-                Project project = new Project(
-                        1, "a", "b", "c", "d", "e", "f", "g"
-                );
-                projectlist.add(project);
-                System.out.println(projectlist);
-                adapter = new AdapterProject(projectlist);
-                binding.projectlistview.setAdapter(adapter);
-                binding.refreshProject.setRefreshing(false);
+                getProjectlist();
+                Log.d("refresh", projectlist.toString());
             }
         });
 
@@ -129,10 +101,10 @@ public class FragmentProject extends Fragment {
         binding.projectlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 
 
-        adapter = new AdapterProject(projectlist);
-        binding.projectlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.projectlistview.setItemAnimator(new DefaultItemAnimator());
-        binding.projectlistview.setAdapter(adapter);
+//        adapter = new AdapterProject(projectlist);
+//        binding.projectlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        binding.projectlistview.setItemAnimator(new DefaultItemAnimator());
+//        binding.projectlistview.setAdapter(adapter);
 
 //        AdapterProject.setOnItemClicklistener(new OnItemClickListener() {
 //            @Override
@@ -157,8 +129,7 @@ public class FragmentProject extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        projectlist.clear();
-        jsonParsing(getJsonString());
+        getProjectlist();
         binding = FragmentProjectBinding.inflate(getLayoutInflater());
     }
 
