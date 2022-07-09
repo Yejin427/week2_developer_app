@@ -19,8 +19,6 @@
         android:theme="@style/Theme.Week2_developer_app"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.actions" />
 
         <activity
             android:name=".IntroActivity"
@@ -50,8 +48,8 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".ProjectaddActivity"></activity>
-        <activity android:name=".EditBoard"/>
-        <activity android:name=".DetailBoard"/>
+        <activity android:name=".EditBoard"></activity>
+        <activity android:name=".DetailBoard"></activity>
 
     </application>
 
