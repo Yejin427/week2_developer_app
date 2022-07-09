@@ -8,15 +8,7 @@
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2911458333333333" />
-<<<<<<< Updated upstream
-=======
-        <entry key="app/src/main/res/layout/add_board.xml" value="0.21105072463768115" />
-        <entry key="app/src/main/res/layout/dialog_projectdelete.xml" value="0.28802083333333334" />
-        <entry key="app/src/main/res/layout/fragment_project.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_project.xml" value="0.24381025134611273" />
->>>>>>> Stashed changes
         <entry key="app/src/main/res/layout/login.xml" value="0.2911458333333333" />
-        <entry key="app/src/main/res/layout/projectdelete_dialog.xml" value="0.271286231884058" />
       </map>
     </option>
   </component>
@@ -25,12 +17,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.24381025134611273" />
-      </ProjectState>
-    </option>
   </component>
 </project>
