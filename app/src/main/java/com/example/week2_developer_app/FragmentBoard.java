@@ -131,8 +131,15 @@ public class FragmentBoard extends Fragment {
             @Override
             public void onItemClick(AdapterBoard.boardViewHolder holder, View view, int pos) {
                 //intent로 게시글 상세 화면으로 넘어감!
+                Board curboard = boardList.get(pos);
                 Intent intent = new Intent(getActivity(), DetailBoard.class);
-                intent.putExtra("position", pos);
+                intent.putExtra("id", curboard.getId());
+                intent.putExtra("writer", curboard.getWriter());
+                intent.putExtra("title", curboard.getTitle());
+                intent.putExtra("contents", curboard.getContents());
+                intent.putExtra("regData", curboard.getRegDate());
+                intent.putExtra("likes", curboard.getLikes());
+
                 startActivity(intent);
 
             }
@@ -141,9 +148,6 @@ public class FragmentBoard extends Fragment {
         binding.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //정보 게시판 쓸 권한 있는지 확인....;
-                //없으면 그냥 질문게시판
-                //게시글 add page로 넘어감
                 Intent intent = new Intent(getActivity(), EditBoard.class);
                 //TODO send user email data
                 //intent.putExtra("useremail", user.getemail());
