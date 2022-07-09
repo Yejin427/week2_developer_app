@@ -51,16 +51,15 @@ public class Project {
     public int getproj_id() {
         return proj_id;
     }
-    public String gettitle() {
-        return title;
-    }
+    public String getwriter() {return writer; }
+    public String getwriter_email() {return writer_email; }
+    public String gettitle() { return title;}
     public String getcontent() {
         return content;
     }
     public String getfield() {
         return field;
     }
-
     public int getlevel() {
         return level;
     }
@@ -73,7 +72,7 @@ public class Project {
     public String gettime() {
         return time;
     }
-    public String regdata(){return regdata;}
+    public String getregdata(){return regdata;}
 
 }
 

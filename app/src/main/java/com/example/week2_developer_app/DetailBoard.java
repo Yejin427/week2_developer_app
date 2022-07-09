@@ -19,8 +19,8 @@ public class DetailBoard extends AppCompatActivity {
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
-        setContentView(binding.getRoot());
         binding = DetailBoardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);

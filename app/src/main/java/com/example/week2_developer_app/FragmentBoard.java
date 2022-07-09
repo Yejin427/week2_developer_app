@@ -180,4 +180,5 @@ public class FragmentBoard extends Fragment {
         //jsonParsing(getJsonString());
         binding = FragmentBoardBinding.inflate(getLayoutInflater());
     }
+
 }
