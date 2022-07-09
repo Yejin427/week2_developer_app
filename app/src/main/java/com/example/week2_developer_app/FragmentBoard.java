@@ -1,6 +1,10 @@
 package com.example.week2_developer_app;
 
+import java.sql.*;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +31,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentBoard extends Fragment {
 
@@ -109,7 +117,6 @@ public class FragmentBoard extends Fragment {
             }
         });
 
-
         binding.boardlistview.setHasFixedSize(true);
         binding.boardlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 
@@ -117,15 +124,31 @@ public class FragmentBoard extends Fragment {
         binding.boardlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.boardlistview.setItemAnimator(new DefaultItemAnimator());
         binding.boardlistview.setAdapter(adapterBoard);
+        adapterBoard.notifyDataSetChanged();
 
-
+        //retroclient2를 통해 서버에서 boardlist data를 가져옴
         adapterBoard.setOnItemClicklistener(new OnPersonItemClickListener() {
             @Override
             public void onItemClick(AdapterBoard.boardViewHolder holder, View view, int pos) {
                 //intent로 게시글 상세 화면으로 넘어감!
+                Intent intent = new Intent(getActivity(), DetailBoard.class);
+                intent.putExtra('position', pos);
+                startActivity(intent);
             }
         });
 
+        binding.addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //정보 게시판 쓸 권한 있는지 확인....;
+                //없으면 그냥 질문게시판
+                //게시글 add page로 넘어감
+                Intent intent = new Intent(getActivity(), EditBoard.class);
+                //TODO send user email data
+                //intent.putExtra("useremail", user.getemail());
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
@@ -133,7 +156,23 @@ public class FragmentBoard extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         boardList.clear();
-        jsonParsing(getJsonString());
+        //retroclient2를 통해 서버에서 boardlist data를 가져옴
+        BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
+
+        boardapi.getBoard().enqueue(new Callback<JoinBoardResponse.getResponse>() {
+            @Override
+            public void onResponse(Call<JoinBoardResponse.getResponse> call, Response<JoinBoardResponse.getResponse> response) {
+                JoinBoardResponse.getResponse result = response.body();
+                boardList.clear();
+                boardList = result.getObject();
+            }
+            @Override
+            public void onFailure(Call<JoinBoardResponse.getResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                Log.e("error: ", t.getMessage());
+            }
+        });
+        //jsonParsing(getJsonString());
         binding = FragmentBoardBinding.inflate(getLayoutInflater());
     }
 }
