@@ -27,6 +27,8 @@ public class EditBoard extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
+        String name = intent.getStringExtra("username");
+        String email = intent.getStringExtra("useremail");
         //회원 정보 받기
         BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
         final String[] type = {null};
@@ -42,7 +44,7 @@ public class EditBoard extends AppCompatActivity {
         binding.info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                type[0] = "Information";
+                type[0] = "Info";
             }
         });
         //나가기 버튼
@@ -65,7 +67,7 @@ public class EditBoard extends AppCompatActivity {
             public void onClick(View view) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String tts = timeToString(timestamp);
-                JoinBoardData.AddData addData = new JoinBoardData.AddData("writer", type[0], binding.title.getText().toString(), binding.contents.getText().toString(), tts);
+                JoinBoardData.AddData addData = new JoinBoardData.AddData(email,name, type[0], binding.title.getText().toString(), binding.contents.getText().toString(), tts);
                 boardapi.userAddBoard(addData).enqueue(new Callback<JoinBoardResponse.AddResponse>(){
                     @Override
                     public void onResponse(Call<JoinBoardResponse.AddResponse> call, Response<JoinBoardResponse.AddResponse> response) {

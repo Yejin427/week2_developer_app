@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class JoinBoardData {
     public static class AddData{
-        @SerializedName("doc_id")
-        private int doc_id;
+        @SerializedName("writer_email")
+        private String writer_email;
 
         @SerializedName("writer")
         private String writer;
@@ -23,18 +23,19 @@ public class JoinBoardData {
         @SerializedName("content")
         private String content;
 
-        @SerializedName("regData")
-        private String regData;
+        @SerializedName("regdata")
+        private String regdata;
 
 //        @SerializedName("picture")
 //        private String picture;
 
-        public AddData(String writer, String type, String title, String content, String regData) {
+        public AddData(String writer_email, String writer, String type, String title, String content, String regdata) {
+            this.writer_email = writer_email;
             this.writer = writer;
             this.type = type;
             this.title = title;
             this.content = content;
-            this.regData = regData;
+            this.regdata = regdata;
             //this.picture = picture;
         }
     }
@@ -71,19 +72,4 @@ class JoinBoardResponse {
         }
     }
 
-    public class getResponse{
-        @SerializedName("code")
-        private int code;
-
-        @SerializedName("resultArray")
-        private ArrayList<Board> resultArray;
-
-        public getResponse(ArrayList<Board> resultArray) throws JSONException {
-            this.resultArray = resultArray;
-        }
-
-        public ArrayList getObject(){
-            return resultArray;
-        }
-    }
 }

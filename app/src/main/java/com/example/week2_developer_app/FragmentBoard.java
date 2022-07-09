@@ -44,47 +44,12 @@ public class FragmentBoard extends Fragment {
     private LinearLayoutManager layoutManager;
     private ArrayList<Board> boardList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
+    String name;
+    String email;
     FragmentBoardBinding binding;
     //TODO 게시판 데이터 불러오기
 
-    private String getJsonString() {
-        String json = "";
 
-        try {
-            InputStream is = getActivity().getAssets().open("Board.json");
-            int fileSize = is.available();
-
-            byte[] buffer = new byte[fileSize];
-            is.read(buffer);
-            is.close();
-
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return json;
-    }
-    private void jsonParsing(String json) {
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-
-            JSONArray boardArray = jsonObject.getJSONArray("Board List");
-            boardList.clear();
-
-            int[] picarr = {R.drawable.icon_add, R.drawable.icon_dot};
-            for (int i = 0; i < boardArray.length(); i++) {
-                JSONObject boardObject = boardArray.getJSONObject(i);
-
-                Board item = new Board(boardObject.getString("title"), boardObject.getString("contents"),
-                        boardObject.getString("writer"), boardObject.getString("regDate"));
-                item.setPicture(ContextCompat.getDrawable(getContext(), picarr[i]));
-                boardList.add(item);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     @Nullable
@@ -110,10 +75,11 @@ public class FragmentBoard extends Fragment {
             @Override
             public void onRefresh() {
                 Toast.makeText(requireContext(), "Refeshed", Toast.LENGTH_SHORT).show();
-                jsonParsing(getJsonString());
+                //jsonParsing(getJsonString());'
                 adapterBoard = new AdapterBoard(boardList);
                 binding.boardlistview.setAdapter(adapterBoard);
                 binding.refreshBoard.setRefreshing(false);
+                adapterBoard.notifyDataSetChanged();
             }
         });
 
@@ -137,7 +103,7 @@ public class FragmentBoard extends Fragment {
                 intent.putExtra("writer", curboard.getWriter());
                 intent.putExtra("title", curboard.getTitle());
                 intent.putExtra("contents", curboard.getContents());
-                intent.putExtra("regData", curboard.getRegDate());
+                intent.putExtra("regdata", curboard.getRegdata());
                 intent.putExtra("likes", curboard.getLikes());
 
                 startActivity(intent);
@@ -150,7 +116,8 @@ public class FragmentBoard extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EditBoard.class);
                 //TODO send user email data
-                //intent.putExtra("useremail", user.getemail());
+                intent.putExtra("useremail", email);
+                intent.putExtra("username", name);
                 startActivity(intent);
             }
         });
@@ -161,18 +128,21 @@ public class FragmentBoard extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         boardList.clear();
+        name = this.getArguments().getString("name");
+        email = this.getArguments().getString("email");
         //retroclient2를 통해 서버에서 boardlist data를 가져옴
         BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
 
-        boardapi.getBoard().enqueue(new Callback<JoinBoardResponse.getResponse>() {
+        boardapi.getBoard().enqueue(new Callback<ArrayList<Board>>() {
             @Override
-            public void onResponse(Call<JoinBoardResponse.getResponse> call, Response<JoinBoardResponse.getResponse> response) {
-                JoinBoardResponse.getResponse result = response.body();
+            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
                 boardList.clear();
-                boardList = result.getObject();
+                boardList.addAll(response.body());
+                adapterBoard.notifyDataSetChanged();
+                Toast.makeText(getActivity(), "게시글 불러오기 성공", Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onFailure(Call<JoinBoardResponse.getResponse> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                 Log.e("error: ", t.getMessage());
             }
@@ -180,4 +150,6 @@ public class FragmentBoard extends Fragment {
         //jsonParsing(getJsonString());
         binding = FragmentBoardBinding.inflate(getLayoutInflater());
     }
+
+
 }

@@ -119,10 +119,10 @@ public class AdapterBoard extends RecyclerView.Adapter<AdapterBoard.boardViewHol
         }
         void onBind(Board board){
             title.setText(board.getTitle());
-            contents.setText(board.getContents().substring(0,10));
-            regDate.setText(board.getRegDate());
+            contents.setText(board.getContents().substring(0,1));
+            regDate.setText(board.getRegdata());
             writer.setText(board.getWriter());
-            imageView.setImageDrawable(board.getPicture());
+            //imageView.setImageDrawable(board.getPicture());
         }
     }
 }

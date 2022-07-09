@@ -2,23 +2,29 @@ package com.example.week2_developer_app;
 
 import android.graphics.drawable.Drawable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Board {
+    @SerializedName("doc_id")
     private int id; //primary key auto increment
     private String title;
+    @SerializedName("content")
     private String contents;
     private String writer;
+    private String writer_email;
     private ArrayList<Comment> commentList;
     private int likes;
-    private String regData;
+    private String regdata;
     private Drawable picture;
 
-    public Board(String title, String contents, String writer, String regData){
+    public Board(String title, String contents, String writer, String writer_email, String regdata){
         this.title = title;
         this.contents = contents;
         this.writer = writer;
-        this.regData = regData;
+        this.writer_email = writer_email;
+        this.regdata = regdata;
         commentList = new ArrayList<>();
         likes = 0;
     }
@@ -40,11 +46,12 @@ public class Board {
     public Comment getComment(int index){
         return commentList.get(index);
     }
+    public String getWriter_email(){return writer_email;}
     public int getLikes(){
         return likes;
     }
-    public String getRegDate(){
-        return regData;
+    public String getRegdata(){
+        return regdata;
     }
     public Drawable getPicture(){
         return picture;

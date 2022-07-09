@@ -19,21 +19,21 @@ public class DetailBoard extends AppCompatActivity {
     @Override
     public void onCreate(Bundle SavedInstanceState){
         super.onCreate(SavedInstanceState);
-        setContentView(binding.getRoot());
         binding = DetailBoardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
         String writer = intent.getStringExtra("writer");
         String title = intent.getStringExtra("title");
         String contents = intent.getStringExtra("contents");
-        String regData = intent.getStringExtra("regData");
+        String regdata = intent.getStringExtra("regdata");
         int likes = intent.getIntExtra("likes", 0);
 
         binding.writer.setText(writer);
         binding.title.setText(title);
         binding.contents.setText(contents);
-        binding.date.setText(regData);
+        binding.date.setText(regdata);
 
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +43,7 @@ public class DetailBoard extends AppCompatActivity {
         });
 
         BoardApi boardApi = RetrofitClient.getClient().create(BoardApi.class);
+
         binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
