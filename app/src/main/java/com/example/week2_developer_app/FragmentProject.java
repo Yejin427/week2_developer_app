@@ -132,6 +132,30 @@ public class FragmentProject extends Fragment implements Listener {
         binding.projectlistview.setItemAnimator(new DefaultItemAnimator());
         binding.projectlistview.setAdapter(adapter);
 
+        adapter.setOnItemClicklistener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterProject.ViewHolder holder, View v, int pos) {
+
+                Project obj = projectlist.get(pos);
+
+                Intent intent = new Intent(getContext(), ProjectdetailActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+
+                intent.putExtra("proj_id", obj.getproj_id());
+                intent.putExtra("writer", obj.getwriter());
+                intent.putExtra("writer_email", obj.getwriter_email());
+                intent.putExtra("title", obj.gettitle());
+                intent.putExtra("field", obj.getfield());
+                intent.putExtra("level", obj.getlevel());
+                intent.putExtra("headcount", obj.getheadcount());
+                intent.putExtra("language", obj.getlanguage());
+                intent.putExtra("time", obj.gettime());
+                intent.putExtra("regdata", obj.getregdata());
+                startActivity(intent);
+            }
+        });
+
         binding.addbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

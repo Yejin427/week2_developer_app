@@ -151,5 +151,4 @@ public class FragmentBoard extends Fragment {
         binding = FragmentBoardBinding.inflate(getLayoutInflater());
     }
 
-
 }
