@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F8FD">
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,28 +18,67 @@
         <EditText
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="제목"/>
 
         <Button
-            android:id="@+id/select_dialog"
-            android:layout_width="match_parent"
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title" />
+            android:layout_below="@id/title"
+            android:text="질문" />
+
+        <Button
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@id/question"
+            android:text="정보" />
+
         <EditText
             android:id="@+id/contents"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/select_dialog"
-            android:maxLength="30" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/question"
+            android:hint="내용을 입력하세요" />
    </RelativeLayout>
 
     <ImageButton
+        android:id="@+id/exit"
+        android:src="@drawable/icon_close"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@id/edit"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit" />
+
+    <ImageButton
         android:id="@+id/sendbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:src="@drawable/icon_ok"
         app:layout_constraintBottom_toTopOf="@id/edit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/imageadd"
+        android:src="@drawable/icon_add"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit"
+        app:layout_constraintRight_toLeftOf="@id/sendbutton"
+        android:layout_marginRight="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,20 +23,19 @@ public class JoinBoardData {
         @SerializedName("content")
         private String content;
 
-        @SerializedName("regDate")
-        private String regDate;
+        @SerializedName("regData")
+        private String regData;
 
-        @SerializedName("picture")
-        private String picture;
+//        @SerializedName("picture")
+//        private String picture;
 
-        public AddData(int doc_id, String writer, String type, String title, String content, String regDate, String picture) {
-            this.doc_id = doc_id;
+        public AddData(String writer, String type, String title, String content, String regData) {
             this.writer = writer;
             this.type = type;
             this.title = title;
             this.content = content;
-            this.regDate = regDate;
-            this.picture = picture;
+            this.regData = regData;
+            //this.picture = picture;
         }
     }
     public static class GetData{

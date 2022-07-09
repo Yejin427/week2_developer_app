@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.week2_developer_app">
 
-    <uses-configuration android:name = "android.permission.INTERNET" />
+    <uses-configuration android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
-        android:name = ".GlobalApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -16,8 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Week2_developer_app"
         android:usesCleartextTraffic="true"
-
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.actions" />
+
         <activity
             android:name=".IntroActivity"
             android:exported="true">
@@ -27,22 +31,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakaod0460decc59c9f319e6315af71a94335" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".EditBoard"/>
+        <activity android:name=".DetailBoard"/>
+
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
