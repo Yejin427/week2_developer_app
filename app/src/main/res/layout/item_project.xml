@@ -12,47 +12,16 @@
     android:padding="10dp">
 
     <!-- Basic Page back ground Color F5F8FD -->
-    <ImageButton
-        android:id="@+id/imagebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop = "5dp"
+    <ImageView
+        android:id="@+id/Image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginLeft = "5dp"
-        android:background="#FFFFFF"
-        android:src = "@drawable/icon_dot"
+        android:src = "@drawable/icon_ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/viewType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:text = "0"
-        android:visibility="invisible"
-        android:fontFamily="@font/applesdgothicneob"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/proj_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:text = "0"
-        android:visibility="invisible"
-        android:fontFamily="@font/applesdgothicneob"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title"
@@ -65,7 +34,7 @@
         android:textSize="15dp"
         android:text = "개발 같이 해요, 개같이"
         android:fontFamily="@font/applesdgothicneob"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
+        app:layout_constraintStart_toEndOf="@+id/Image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -80,8 +49,8 @@
         android:textSize="10dp"
         android:fontFamily="@font/applesdgothicneol"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toEndOf="@+id/Image"
+        app:layout_constraintTop_toBottomOf="@+id/Name"
         />
 
 

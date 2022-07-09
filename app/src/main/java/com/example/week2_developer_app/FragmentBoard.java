@@ -123,12 +123,6 @@ public class FragmentBoard extends Fragment {
             @Override
             public void onItemClick(AdapterBoard.boardViewHolder holder, View view, int pos) {
                 //intent로 게시글 상세 화면으로 넘어감!
-<<<<<<< Updated upstream
-=======
-                Intent intent = new Intent(getActivity(), DetailBoard.class);
-                intent.putExtra("position", pos);
-                startActivity(intent);
->>>>>>> Stashed changes
             }
         });
 
