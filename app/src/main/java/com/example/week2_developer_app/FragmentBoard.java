@@ -132,7 +132,7 @@ public class FragmentBoard extends Fragment {
             public void onItemClick(AdapterBoard.boardViewHolder holder, View view, int pos) {
                 //intent로 게시글 상세 화면으로 넘어감!
                 Intent intent = new Intent(getActivity(), DetailBoard.class);
-                intent.putExtra('position', pos);
+                intent.putExtra("position", pos);
                 startActivity(intent);
 
             }

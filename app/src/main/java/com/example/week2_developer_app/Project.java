@@ -81,18 +81,15 @@ interface ProjectApi{
     @GET("/user/getproject")
     Call<List<Project>> getProject();
     @POST("/user/addproject")
-    Call<ProjectaddResponse> addProject(@Body Project project);
-}
-
-class ProjectaddResponse {
-
+    Call<ProjectResponse> addProject(@Body Project project);
     @POST("/user/getmyproject")
     Call<List<Project>> getmyProject(@Body Project_myData project);
-    @POST("/user/addproject")
-    Call<ProjectResponse> addProject(@Body Project project);
     @POST("/user/deleteproject")
     Call<ProjectResponse> deleteProject(@Body Project_deleteData project);
 }
+
+
+
 
 class ProjectResponse {
 

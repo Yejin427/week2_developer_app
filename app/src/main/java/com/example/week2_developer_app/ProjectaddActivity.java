@@ -58,10 +58,10 @@ public class ProjectaddActivity extends AppCompatActivity {
 
                 Project data = new Project(0, writer, writer_email, title, content, field, level, headcount, language, time, regdata);
 
-                service.addProject(data).enqueue(new Callback<ProjectaddResponse>(){
+                service.addProject(data).enqueue(new Callback<ProjectResponse>(){
                     @Override
-                    public void onResponse(Call<ProjectaddResponse> call, Response<ProjectaddResponse> response) {
-                        ProjectaddResponse result = response.body();
+                    public void onResponse(Call<ProjectResponse> call, Response<ProjectResponse> response) {
+                        ProjectResponse result = response.body();
                         if(result.getCode() == 200) {
                             Toast.makeText(getApplicationContext(), "추가되었습니다!", Toast.LENGTH_SHORT);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -72,7 +72,7 @@ public class ProjectaddActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<ProjectaddResponse> call, Throwable t) {
+                    public void onFailure(Call<ProjectResponse> call, Throwable t) {
 
                     }
                 });
