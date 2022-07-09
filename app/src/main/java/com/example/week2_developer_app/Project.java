@@ -10,8 +10,9 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public class Project {
-    @SerializedName("id")
-    private int id;
+
+    @SerializedName("proj_id")
+    private int proj_id;
     @SerializedName("writer")
     private String writer;
     @SerializedName("writer_email")
@@ -33,8 +34,8 @@ public class Project {
     @SerializedName("regdata")
     private String regdata;
 
-    public Project(int id, String writer, String writer_email, String title, String content, String field, int level, int headcount, String language, String time, String regdata){
-        this.id = id;
+    public Project(int proj_id, String writer, String writer_email, String title, String content, String field, int level, int headcount, String language, String time, String regdata){
+        this.proj_id = proj_id;
         this.writer = writer;
         this.writer_email = writer_email;
         this.title = title;
@@ -47,8 +48,8 @@ public class Project {
         this.regdata = regdata;
     }
 
-    public int getid() {
-        return id;
+    public int getproj_id() {
+        return proj_id;
     }
     public String gettitle() {
         return title;
@@ -85,10 +86,36 @@ interface ProjectApi{
 
 class ProjectaddResponse {
 
+    @POST("/user/getmyproject")
+    Call<List<Project>> getmyProject(@Body Project_myData project);
+    @POST("/user/addproject")
+    Call<ProjectResponse> addProject(@Body Project project);
+    @POST("/user/deleteproject")
+    Call<ProjectResponse> deleteProject(@Body Project_deleteData project);
+}
+
+class ProjectResponse {
+
     @SerializedName("code")
     private int code;
     public int getCode() {
         return code;
+    }
+}
+
+class Project_myData{
+    @SerializedName("userEmail")
+    String userEmail;
+    public Project_myData(String userEmail){
+        this.userEmail = userEmail;
+    }
+}
+
+class Project_deleteData{
+    @SerializedName("proj_id")
+    int proj_id;
+    public Project_deleteData(int proj_id){
+        this.proj_id = proj_id;
     }
 }
 

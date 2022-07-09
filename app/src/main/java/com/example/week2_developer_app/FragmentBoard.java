@@ -134,6 +134,7 @@ public class FragmentBoard extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailBoard.class);
                 intent.putExtra('position', pos);
                 startActivity(intent);
+
             }
         });
 
