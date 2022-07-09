@@ -25,10 +25,16 @@ public class MainActivity extends FragmentActivity {
 
     TabLayout tabs;
 
+    private String name;
+    private String email;
+
     FragmentProject fragmentProject;
     FragmentBoard fragmentBoard;
 //    FragmentChat fragmentChat;
 
+    String getName(){
+        return name;
+    }
     private void getHashKey(){
         PackageInfo packageInfo = null;
         try {
@@ -54,11 +60,20 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        name = getIntent().getStringExtra("name");
+        email = getIntent().getStringExtra("email");
+
         getHashKey();
         fragmentProject = new FragmentProject();
         fragmentBoard = new FragmentBoard();
+
 //        fragmentChat = new FragmentChat();
 
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        bundle.putString("email", email);
+        fragmentProject.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragmentProject).commit();
 
         tabs = findViewById(R.id.tabs);
@@ -77,6 +92,11 @@ public class MainActivity extends FragmentActivity {
                     selected = fragmentBoard;
                 else if(position == 2)
                     selected = fragmentProject;
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("email", email);
+                selected.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 

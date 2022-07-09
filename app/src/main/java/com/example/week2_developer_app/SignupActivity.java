@@ -75,7 +75,8 @@ public class SignupActivity extends AppCompatActivity {
                         SignupResponse result = response.body();
                         if (result.getCode() == 200) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
+                            intent.putExtra("name", name);
+                            intent.putExtra("email", email);
                             startActivity(intent);
                             finish();
                         }

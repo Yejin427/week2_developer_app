@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class FragmentProject extends Fragment {
     private RecyclerView recyclerView;
     private SearchView searchView;
     private AdapterProject adapter;
+    private String name;
+    private String email;
 
     private FragmentProjectBinding binding;
 
@@ -49,7 +52,7 @@ public class FragmentProject extends Fragment {
     private void getProjectlist(){
 
         projectlist.clear();
-        GetProject service = RetrofitClient.getClient().create(GetProject.class);
+        ProjectApi service = RetrofitClient.getClient().create(ProjectApi.class);
         Call<List<Project>> call = service.getProject();
         call.enqueue(new Callback<List<Project>>() {
             @Override
@@ -59,7 +62,7 @@ public class FragmentProject extends Fragment {
 
                 adapter = new AdapterProject(projectlist);
                 binding.projectlistview.setAdapter(adapter);
-                binding.refreshProject.setRefreshing(false);
+
             }
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
@@ -93,6 +96,7 @@ public class FragmentProject extends Fragment {
             public void onRefresh() {
                 Toast.makeText(requireContext(), "Refeshed", Toast.LENGTH_SHORT).show();
                 getProjectlist();
+                binding.refreshProject.setRefreshing(false);
                 Log.d("refresh", projectlist.toString());
             }
         });
@@ -100,11 +104,10 @@ public class FragmentProject extends Fragment {
         binding.projectlistview.setHasFixedSize(true);
         binding.projectlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 
-
-//        adapter = new AdapterProject(projectlist);
-//        binding.projectlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        binding.projectlistview.setItemAnimator(new DefaultItemAnimator());
-//        binding.projectlistview.setAdapter(adapter);
+        adapter = new AdapterProject(projectlist);
+        binding.projectlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.projectlistview.setItemAnimator(new DefaultItemAnimator());
+        binding.projectlistview.setAdapter(adapter);
 
 //        AdapterProject.setOnItemClicklistener(new OnItemClickListener() {
 //            @Override
@@ -121,6 +124,15 @@ public class FragmentProject extends Fragment {
 //
 //            }
 //        });
+        binding.addbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ProjectaddActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                startActivity(intent);
+            }
+        });
 
 
         return rootView;
@@ -130,7 +142,10 @@ public class FragmentProject extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         getProjectlist();
+        Log.d("str", this.getArguments().getString("name"));
+        Log.d("str", this.getArguments().getString("email"));
+        name = this.getArguments().getString("name");
+        email = this.getArguments().getString("email");
         binding = FragmentProjectBinding.inflate(getLayoutInflater());
     }
-
 }

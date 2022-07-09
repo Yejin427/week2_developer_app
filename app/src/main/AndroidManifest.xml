@@ -43,6 +43,7 @@
         </activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".ProjectaddActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

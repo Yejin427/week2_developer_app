@@ -104,6 +104,8 @@ public class IntroActivity extends AppCompatActivity {
                                 Log.d("tag", "일치하는 아이디가 있습니다.");
                                 Toast.makeText(IntroActivity.this, userinfo.get(1)+"님 "+"환영합니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("name", userinfo.get(0));
+                                intent.putExtra("email", userinfo.get(1));
                                 startActivity(intent);
                             }
                             else{
