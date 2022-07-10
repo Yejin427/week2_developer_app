@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ImageButton
         android:id="@+id/back"
@@ -61,6 +63,31 @@
             android:text="2022/07/09"
             android:textSize="13sp"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/date"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/mycomment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment_recyclerview"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/add_mycomment"
+            android:hint="댓글을 입력하세요" />
+
+        <ImageButton
+            android:id="@+id/add_mycomment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment_recyclerview"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/icon_add" />
 
     </RelativeLayout>
 

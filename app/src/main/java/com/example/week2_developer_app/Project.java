@@ -88,8 +88,6 @@ interface ProjectApi{
 }
 
 
-
-
 class ProjectResponse {
 
     @SerializedName("code")

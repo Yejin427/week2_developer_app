@@ -49,9 +49,14 @@
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".ProjectaddActivity"></activity>
         <activity android:name=".EditBoard"></activity>
+
         <activity android:name=".DetailBoard"></activity>
         <activity android:name=".ProjectdetailActivity"></activity>
         <activity android:name=".ChatActivity"></activity>
+
+        <activity android:name=".DetailBoard"
+                android:windowSoftInputMode="adjustResize"></activity>
+
 
     </application>
 

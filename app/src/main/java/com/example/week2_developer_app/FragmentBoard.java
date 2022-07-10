@@ -1,7 +1,5 @@
 package com.example.week2_developer_app;
 
-import java.sql.*;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,13 +21,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.example.week2_developer_app.databinding.FragmentBoardBinding;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -118,14 +109,16 @@ public class FragmentBoard extends Fragment {
                 Board curboard = boardList.get(pos);
                 Intent intent = new Intent(getActivity(), DetailBoard.class);
                 intent.putExtra("id", curboard.getId());
+                intent.putExtra("email", curboard.getWriter_email());
                 intent.putExtra("writer", curboard.getWriter());
                 intent.putExtra("title", curboard.getTitle());
                 intent.putExtra("contents", curboard.getContents());
                 intent.putExtra("regdata", curboard.getRegdata());
                 intent.putExtra("likes", curboard.getLikes());
 
+                intent.putExtra("useremail", email);
+                intent.putExtra("username", name);
                 startActivity(intent);
-
             }
         });
 
