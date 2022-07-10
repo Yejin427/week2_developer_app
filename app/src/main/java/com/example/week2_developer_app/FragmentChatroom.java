@@ -108,10 +108,10 @@ public class FragmentChatroom extends Fragment implements Listener {
             public void onItemClick(AdapterChatroom.ViewHolder holder, View v, int pos) {
 
                 Chatroom obj = chatroomlist.get(pos);
-                Intent intent = new Intent(getContext(), ProjectdetailActivity.class);
+                Intent intent = new Intent(getContext(), ChatActivity.class);
                 intent.putExtra("name", name);
                 intent.putExtra("email", email);
-
+                intent.putExtra("chat_id", obj.getChat_id());
                 startActivity(intent);
             }
         });

@@ -67,9 +67,3 @@ class ChatroomResponse {
         return code;
     }
 }
-
-class Chatroom_deleteData{
-    @SerializedName("chat_id")
-    int chat_id;
-    public Chatroom_deleteData(int chat_id){this.chat_id = chat_id;}
-}
