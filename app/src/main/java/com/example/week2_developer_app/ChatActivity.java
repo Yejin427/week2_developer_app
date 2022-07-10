@@ -45,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Chatmsg>>() {
             @Override
             public void onResponse(Call<List<Chatmsg>> call, Response<List<Chatmsg>> response) {
-                Log.d("response", response.body().toString());
+
                 chatmsglist.clear();
                 for(int i=0; i < response.body().size() ;i++){
                     if(response.body().get(i).getSender_name().equals(name))

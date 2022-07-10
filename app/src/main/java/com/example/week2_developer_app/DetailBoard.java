@@ -31,6 +31,31 @@ public class DetailBoard extends AppCompatActivity {
     AdapterComment adapterComment;
     ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
     CommentApi commentApi;
+    int id = 0;
+
+    private void getcommentArraylist(){
+        commentArrayList.clear();
+        commentApi = RetrofitClient.getClient().create(CommentApi.class);
+
+        Comment_myData data = new Comment_myData(id);
+        commentApi.getComment(data).enqueue(new Callback<ArrayList<Comment>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Comment>> call, Response<ArrayList<Comment>> response) {
+
+                commentArrayList.clear();
+                commentArrayList.addAll(response.body());
+                adapterComment.notifyDataSetChanged();
+                adapterComment = new AdapterComment(commentArrayList);
+                binding.commentRecyclerview.setAdapter(adapterComment);
+                Toast.makeText(getApplicationContext(), "댓글 불러오기 성공", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Comment>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "댓글 불러오기 실패", Toast.LENGTH_SHORT).show();
+                Log.e("error: ", t.getMessage());
+            }
+        });
+    }
 
     @Override
     public void onCreate(Bundle SavedInstanceState){
@@ -39,7 +64,7 @@ public class DetailBoard extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
+        id = intent.getIntExtra("id", 0);
         String writer = intent.getStringExtra("writer");
         String title = intent.getStringExtra("title");
         String writer_email = intent.getStringExtra("email");
@@ -106,35 +131,11 @@ public class DetailBoard extends AppCompatActivity {
         });
 
 
+        getcommentArraylist();
 
-        //comment recyclerview set
-        commentApi = RetrofitClient.getClient().create(CommentApi.class);
-        Comment_myData data = new Comment_myData(id);
-        Log.d("여기", "여기");
-        commentApi.getComment(data).enqueue(new Callback<ArrayList<Comment>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Comment>> call, Response<ArrayList<Comment>> response) {
-                int a = response.body().size();
-                Log.d("str", ""+a);
-                commentArrayList.clear();
-                commentArrayList.addAll(response.body());
-                adapterComment.notifyDataSetChanged();
-                adapterComment = new AdapterComment(commentArrayList);
-                binding.commentRecyclerview.setAdapter(adapterComment);
-                Toast.makeText(getApplicationContext(), "댓글 불러오기 성공", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFailure(Call<ArrayList<Comment>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "댓글 불러오기 실패", Toast.LENGTH_SHORT).show();
-                Log.e("error: ", t.getMessage());
-            }
-        });
-
-//        Log.d("보여주세요.", commentArrayList.toString());
         adapterComment = new AdapterComment(commentArrayList);
         binding.commentRecyclerview.setHasFixedSize(true);
         binding.commentRecyclerview.addItemDecoration(new DividerItemDecoration(this, 1));
-
         binding.commentRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.commentRecyclerview.setItemAnimator(new DefaultItemAnimator());
         binding.commentRecyclerview.setAdapter(adapterComment);
@@ -153,6 +154,7 @@ public class DetailBoard extends AppCompatActivity {
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
         });
+
         //댓글 전송 버튼 클릭
         binding.addMycomment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +179,9 @@ public class DetailBoard extends AppCompatActivity {
                         Log.e("error: ", t.getMessage());
                     }
                 });
+//                getcommentArraylist();
+                recreate();
+                binding.mycomment.setText("");
             }
         });
     }
