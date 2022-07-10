@@ -53,7 +53,7 @@ public class ChatActivity extends AppCompatActivity {
                     chatmsglist.add(response.body().get(i));
                 }
                 adapter.notifyDataSetChanged();
-                adapter = new AdapterChatmsg(chatmsglist, name);
+                adapter = new AdapterChatmsg(chatmsglist);
                 binding.chatmsglistview.setAdapter(adapter);
             }
             @Override
@@ -104,7 +104,7 @@ public class ChatActivity extends AppCompatActivity {
         binding.chatmsglistview.setHasFixedSize(true);
         binding.chatmsglistview.addItemDecoration(new DividerItemDecoration(getApplicationContext(), 1));
 
-        adapter = new AdapterChatmsg(chatmsglist, name);
+        adapter = new AdapterChatmsg(chatmsglist);
         binding.chatmsglistview.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.chatmsglistview.setItemAnimator(new DefaultItemAnimator());
         binding.chatmsglistview.setAdapter(adapter);

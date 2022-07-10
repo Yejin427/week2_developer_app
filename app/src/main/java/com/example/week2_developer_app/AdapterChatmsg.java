@@ -22,14 +22,12 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<Chatmsg> chatmsgs_filtered = new ArrayList<Chatmsg>();
     private ArrayList<Chatmsg> chatmsgs = new ArrayList<Chatmsg>();
     private ArrayList<Chatmsg> chatmsgs_list = new ArrayList<Chatmsg>();
-    private String self_name;
 
-    public AdapterChatmsg(ArrayList<Chatmsg> myData, String name){
+    public AdapterChatmsg(ArrayList<Chatmsg> myData){
         this.context = context;
         this.chatmsgs_filtered = myData;
         this.chatmsgs = myData;
         this.chatmsgs_list.addAll(myData);
-        this.self_name = name;
     }
 
     @NonNull
@@ -98,7 +96,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
     @Override
     public int getItemViewType(int position){
-        return position;
+        return chatmsgs.get(position).getviewType();
     }
 
     static class ViewHoldermy extends RecyclerView.ViewHolder {
@@ -109,7 +107,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ImageButton imagebtn;
         TextView regdata;
 
-        public ViewHoldermy(@NonNull View itemView) {
+        ViewHoldermy(@NonNull View itemView) {
             super(itemView);
             chat_id = (TextView) itemView.findViewById(R.id.chat_id);
             msg_id = (TextView) itemView.findViewById(R.id.msg_id);
@@ -127,7 +125,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ImageButton imagebtn;
         TextView regdata;
 
-        public ViewHolderoppo(@NonNull View itemView) {
+        ViewHolderoppo(@NonNull View itemView) {
             super(itemView);
             chat_id = (TextView) itemView.findViewById(R.id.chat_id);
             msg_id = (TextView) itemView.findViewById(R.id.msg_id);
