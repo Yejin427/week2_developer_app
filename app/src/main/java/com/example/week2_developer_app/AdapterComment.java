@@ -3,6 +3,8 @@ package com.example.week2_developer_app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,8 +13,8 @@ import com.example.week2_developer_app.databinding.ItemCommentBinding;
 import java.util.ArrayList;
 
 public class AdapterComment extends RecyclerView.Adapter<AdapterComment.commentViewHolder> implements OnCommentItemClickListener{
-    ItemCommentBinding binding;
-    private ArrayList<Comment> comments = new ArrayList<>();
+
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
     private static OnCommentItemClickListener listener;
 
     public AdapterComment(ArrayList<Comment> commentList){
@@ -60,9 +62,9 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.commentV
             });
         }
         void onBind(Comment comment){
-            binding.contents.setText(comment.getContents());
-            binding.date.setText(comment.getRegData());
-            binding.writer.setText(comment.getWriter());
+            ((TextView)itemView.findViewById(R.id.contents)).setText(comment.getContents());
+            ((TextView)itemView.findViewById(R.id.date)).setText(comment.getRegData());
+            ((TextView)itemView.findViewById(R.id.writer)).setText(comment.getWriter());
         }
     }
 }

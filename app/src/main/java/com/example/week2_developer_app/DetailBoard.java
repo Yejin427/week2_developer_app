@@ -28,9 +28,8 @@ import retrofit2.Response;
 
 public class DetailBoard extends AppCompatActivity {
     DetailBoardBinding binding;
-    RecyclerView comment_recyclerview;
     AdapterComment adapterComment;
-    ArrayList<Comment> commentArrayList;
+    ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
     CommentApi commentApi;
 
     @Override
@@ -66,6 +65,8 @@ public class DetailBoard extends AppCompatActivity {
         if(!useremail.equals(writer_email)){
             binding.delete.setVisibility(View.GONE);
         }
+
+
         BoardApi boardApi = RetrofitClient.getClient().create(BoardApi.class);
 
         binding.delete.setOnClickListener(new View.OnClickListener() {
@@ -103,15 +104,23 @@ public class DetailBoard extends AppCompatActivity {
                 dialog.showDialog();
             }
         });
-        //comment recyclerview set
-        BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
 
-        commentApi.getComment().enqueue(new Callback<ArrayList<Comment>>() {
+
+
+        //comment recyclerview set
+        commentApi = RetrofitClient.getClient().create(CommentApi.class);
+        Comment_myData data = new Comment_myData(id);
+        Log.d("여기", "여기");
+        commentApi.getComment(data).enqueue(new Callback<ArrayList<Comment>>() {
             @Override
             public void onResponse(Call<ArrayList<Comment>> call, Response<ArrayList<Comment>> response) {
+                int a = response.body().size();
+                Log.d("str", ""+a);
                 commentArrayList.clear();
                 commentArrayList.addAll(response.body());
                 adapterComment.notifyDataSetChanged();
+                adapterComment = new AdapterComment(commentArrayList);
+                binding.commentRecyclerview.setAdapter(adapterComment);
                 Toast.makeText(getApplicationContext(), "댓글 불러오기 성공", Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -121,10 +130,11 @@ public class DetailBoard extends AppCompatActivity {
             }
         });
 
+//        Log.d("보여주세요.", commentArrayList.toString());
+        adapterComment = new AdapterComment(commentArrayList);
         binding.commentRecyclerview.setHasFixedSize(true);
         binding.commentRecyclerview.addItemDecoration(new DividerItemDecoration(this, 1));
 
-        adapterComment = new AdapterComment(commentArrayList);
         binding.commentRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.commentRecyclerview.setItemAnimator(new DefaultItemAnimator());
         binding.commentRecyclerview.setAdapter(adapterComment);
@@ -153,7 +163,7 @@ public class DetailBoard extends AppCompatActivity {
 
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String tts = timeToString(timestamp);
-                commentApi.addComment(new Comment(binding.mycomment.getText().toString(), username, tts, id)).enqueue(new Callback<CommentResponse>() {
+                commentApi.addComment(new Comment(0, id, tts, username, useremail, binding.mycomment.getText().toString())).enqueue(new Callback<CommentResponse>() {
                     @Override
                     public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
                         CommentResponse result = response.body();

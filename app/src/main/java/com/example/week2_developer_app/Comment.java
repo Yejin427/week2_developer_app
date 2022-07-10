@@ -10,20 +10,31 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public class Comment {
+    @SerializedName("comment_id")
     private int comment_id;  //primary key auto increment
-    private String content;
-    private String writer;
-    private String writer_email;
-    private String regdata;
+    @SerializedName("doc_id")
     private int doc_id;  //document id foreign key on delete cascade
+    @SerializedName("regdata")
+    private String regdata;
+    @SerializedName("writer")
+    private String writer;
+    @SerializedName("writer_email")
+    private String writer_email;
+    @SerializedName("content")
+    private String content;
+
+
     //todo maybe comment - comment
 
-    public Comment(String content, String writer, String regdata, int doc_id){
-        this.content = content;
-        this.writer = writer;
-        this.regdata = regdata;
+    public Comment(int comment_id, int doc_id, String regdata, String writer, String writer_email, String content){
+        this.comment_id = comment_id;
         this.doc_id = doc_id;
+        this.regdata = regdata;
+        this.writer = writer;
+        this.writer_email = writer_email;
+        this.content = content;
     }
+
     public void setContent(String content){
         this.content = content;
     }
@@ -44,14 +55,22 @@ public class Comment {
     public String getRegData(){return regdata;}
     public String getWriter_email(){return writer_email;}
     public int getDoc_id(){return doc_id;}
+    public int getComment_id(){return comment_id;}
 }
 interface CommentApi{
     @POST("/user/addcomment")
     Call<CommentResponse> addComment(@Body Comment comment);
     @POST("/user/getcomment")
-    Call<ArrayList<Comment>> getComment();
+    Call<ArrayList<Comment>> getComment(@Body Comment_myData data);
 }
 
+class Comment_myData{
+    @SerializedName("doc_id")
+    private int doc_id;
+    public Comment_myData(int doc_id){
+        this.doc_id = doc_id;
+    }
+}
 
 class CommentResponse {
     @SerializedName("code")
