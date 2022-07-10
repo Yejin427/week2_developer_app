@@ -9,6 +9,7 @@
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/drawable/roundbutton_selected.xml" value="0.1" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/drawable/xml_border.xml" value="0.169" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/activity_addproject.xml" value="0.1" />
+        <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/activity_chatmsg.xml" value="0.1388888888888889" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/activity_detailproject.xml" value="0.33" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/activity_main.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/activity_signup.xml" value="0.23333333333333334" />
@@ -17,7 +18,9 @@
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/dialog_projectdelete.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/fragment_board.xml" value="0.33" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/item_board.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/item_chatmsgmy.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/item_comment.xml" value="0.738238841978287" />
+        <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/item_project.xml" value="0.33" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/layout.xml" value="0.19067028985507245" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_addproject.xml" value="0.22" />

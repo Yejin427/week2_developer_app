@@ -50,7 +50,6 @@
         <activity android:name=".ProjectaddActivity"></activity>
         <activity android:name=".EditBoard"></activity>
 
-        <activity android:name=".DetailBoard"></activity>
         <activity android:name=".ProjectdetailActivity"></activity>
         <activity android:name=".ChatActivity"></activity>
 
