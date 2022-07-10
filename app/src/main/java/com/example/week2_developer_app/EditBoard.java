@@ -67,22 +67,19 @@ public class EditBoard extends AppCompatActivity {
             public void onClick(View view) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String tts = timeToString(timestamp);
-                JoinBoardData.AddData addData = new JoinBoardData.AddData(email,name, type[0], binding.title.getText().toString(), binding.contents.getText().toString(), tts);
+                JoinBoardData.AddData addData = new JoinBoardData.AddData(email, name, type[0], binding.title.getText().toString(), binding.contents.getText().toString(), tts);
                 boardapi.userAddBoard(addData).enqueue(new Callback<JoinBoardResponse.AddResponse>(){
                     @Override
                     public void onResponse(Call<JoinBoardResponse.AddResponse> call, Response<JoinBoardResponse.AddResponse> response) {
                         JoinBoardResponse.AddResponse result = response.body();
-                        Toast.makeText(EditBoard.this, result.getCode(), Toast.LENGTH_SHORT).show();
                         if(result.getCode() == 200){
-                            Log.d("tag", "업로드에 성공");
-                            //업로드 성공 창....??
+                            Toast.makeText(EditBoard.this, "업로드에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                         else{
                             Log.d("tag", "게시글 업로드 에러");
                         }
                     }
-
                     @Override
                     public void onFailure(Call<JoinBoardResponse.AddResponse> call, Throwable t) {
                         Toast.makeText(EditBoard.this, "게시글 업로드 에러", Toast.LENGTH_SHORT).show();

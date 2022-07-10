@@ -46,7 +46,6 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
     public void setViewtype(int type){
         this.viewtype = type;
     }
-
     public int getViewtype(){
         return this.viewtype;
     }

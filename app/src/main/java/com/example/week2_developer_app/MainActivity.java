@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity {
 
     FragmentProject fragmentProject;
     FragmentBoard fragmentBoard;
-//    FragmentChat fragmentChat;
+    FragmentChatroom fragmentChatroom;
 
     String getName(){
         return name;
@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity {
         fragmentProject = new FragmentProject();
         fragmentBoard = new FragmentBoard();
 
-//        fragmentChat = new FragmentChat();
+        fragmentChatroom = new FragmentChatroom();
 
         Bundle bundle = new Bundle();
         bundle.putString("name", name);
@@ -91,7 +91,7 @@ public class MainActivity extends FragmentActivity {
                 else if(position == 1)
                     selected = fragmentBoard;
                 else if(position == 2)
-                    selected = fragmentProject;
+                    selected = fragmentChatroom;
 
                 Bundle bundle = new Bundle();
                 bundle.putString("name", name);

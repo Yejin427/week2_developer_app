@@ -40,6 +40,7 @@ public class ProjectdetailActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("email");
 
+        int proj_id = intent.getIntExtra("proj_id" , 0);
         binding.projId.setText(Integer.toString(intent.getIntExtra("proj_id" , 0)));
         binding.writer.setText(intent.getStringExtra("writer"));
         binding.writerEmail.setText(intent.getStringExtra("writer_email"));
@@ -67,11 +68,34 @@ public class ProjectdetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ProjectApi projectApi = RetrofitClient.getClient().create(ProjectApi.class);
+                Listener listener2 = new Listener() {
+                    @Override
+                    public void returnyes(String str) {
 
+                        ProjectApi service = RetrofitClient.getClient().create(ProjectApi.class);
+                        Project_deleteData data = new Project_deleteData(proj_id);
 
+                        service.deleteProject(data).enqueue(new Callback<ProjectResponse>(){
+                            @Override
+                            public void onResponse(Call<ProjectResponse> call, Response<ProjectResponse> response) {
+                                ProjectResponse result = response.body();
+                                if(result.getCode() == 200) {
+                                    Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT);
+                                    finish();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<ProjectResponse> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), "에러발생.", Toast.LENGTH_SHORT);
+                            }
+                        });
+                    }
+                };
 
+                DialogProjectdelete dialog = new DialogProjectdelete(ProjectdetailActivity.this, listener2);
+                dialog.showDialog();
             }
         });
     }
 }
+

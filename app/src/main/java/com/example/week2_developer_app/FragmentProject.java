@@ -58,15 +58,17 @@ public class FragmentProject extends Fragment implements Listener {
             @Override
             public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
                 Log.d("response", response.body().toString());
+                projectlist.clear();
                 projectlist.addAll(response.body());
 
+                adapter.notifyDataSetChanged();
                 adapter = new AdapterProject(projectlist);
                 adapter.setViewtype(viewtype);
                 binding.projectlistview.setAdapter(adapter);
-
             }
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -146,6 +148,7 @@ public class FragmentProject extends Fragment implements Listener {
                 intent.putExtra("writer", obj.getwriter());
                 intent.putExtra("writer_email", obj.getwriter_email());
                 intent.putExtra("title", obj.gettitle());
+                intent.putExtra("content", obj.getcontent());
                 intent.putExtra("field", obj.getfield());
                 intent.putExtra("level", obj.getlevel());
                 intent.putExtra("headcount", obj.getheadcount());
@@ -220,6 +223,30 @@ public class FragmentProject extends Fragment implements Listener {
                 getProjectlist(0);
                 binding.deletebtn.setVisibility(View.VISIBLE);
                 binding.backbtn.setVisibility(View.INVISIBLE);
+                adapter.setOnItemClicklistener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterProject.ViewHolder holder, View v, int pos) {
+
+                        Project obj = projectlist.get(pos);
+
+                        Intent intent = new Intent(getContext(), ProjectdetailActivity.class);
+                        intent.putExtra("name", name);
+                        intent.putExtra("email", email);
+
+                        intent.putExtra("proj_id", obj.getproj_id());
+                        intent.putExtra("writer", obj.getwriter());
+                        intent.putExtra("writer_email", obj.getwriter_email());
+                        intent.putExtra("title", obj.gettitle());
+                        intent.putExtra("content", obj.getcontent());
+                        intent.putExtra("field", obj.getfield());
+                        intent.putExtra("level", obj.getlevel());
+                        intent.putExtra("headcount", obj.getheadcount());
+                        intent.putExtra("language", obj.getlanguage());
+                        intent.putExtra("time", obj.gettime());
+                        intent.putExtra("regdata", obj.getregdata());
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
@@ -227,21 +254,23 @@ public class FragmentProject extends Fragment implements Listener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getProjectlist(0);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         getProjectlist(0);
-        Log.d("str", this.getArguments().getString("name"));
-        Log.d("str", this.getArguments().getString("email"));
         name = this.getArguments().getString("name");
         email = this.getArguments().getString("email");
         binding = FragmentProjectBinding.inflate(getLayoutInflater());
     }
 
     @Override
-    public void returnyes(String str) {
-
-    }
+    public void returnyes(String str) {}
 }
 
 interface Listener{

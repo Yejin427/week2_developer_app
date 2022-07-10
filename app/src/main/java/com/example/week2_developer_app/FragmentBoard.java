@@ -50,6 +50,27 @@ public class FragmentBoard extends Fragment {
     //TODO 게시판 데이터 불러오기
 
 
+    private void getBoardList(){
+
+        boardList.clear();
+        BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
+
+        boardapi.getBoard().enqueue(new Callback<ArrayList<Board>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
+                boardList.clear();
+                boardList.addAll(response.body());
+
+                adapterBoard.notifyDataSetChanged();
+                adapterBoard = new AdapterBoard(boardList);
+                binding.boardlistview.setAdapter(adapterBoard);
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     @Nullable
@@ -75,11 +96,8 @@ public class FragmentBoard extends Fragment {
             @Override
             public void onRefresh() {
                 Toast.makeText(requireContext(), "Refeshed", Toast.LENGTH_SHORT).show();
-                //jsonParsing(getJsonString());'
-                adapterBoard = new AdapterBoard(boardList);
-                binding.boardlistview.setAdapter(adapterBoard);
+                getBoardList();
                 binding.refreshBoard.setRefreshing(false);
-                adapterBoard.notifyDataSetChanged();
             }
         });
 
@@ -90,7 +108,7 @@ public class FragmentBoard extends Fragment {
         binding.boardlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.boardlistview.setItemAnimator(new DefaultItemAnimator());
         binding.boardlistview.setAdapter(adapterBoard);
-        adapterBoard.notifyDataSetChanged();
+
 
         //retroclient2를 통해 서버에서 boardlist data를 가져옴
         adapterBoard.setOnItemClicklistener(new OnPersonItemClickListener() {
@@ -115,9 +133,8 @@ public class FragmentBoard extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EditBoard.class);
-                //TODO send user email data
-                intent.putExtra("useremail", email);
                 intent.putExtra("username", name);
+                intent.putExtra("useremail", email);
                 startActivity(intent);
             }
         });
@@ -127,28 +144,15 @@ public class FragmentBoard extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        boardList.clear();
+        binding = FragmentBoardBinding.inflate(getLayoutInflater());
         name = this.getArguments().getString("name");
         email = this.getArguments().getString("email");
-        //retroclient2를 통해 서버에서 boardlist data를 가져옴
-        BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
 
-        boardapi.getBoard().enqueue(new Callback<ArrayList<Board>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-                boardList.clear();
-                boardList.addAll(response.body());
-                adapterBoard.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "게시글 불러오기 성공", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
-                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-                Log.e("error: ", t.getMessage());
-            }
-        });
-        //jsonParsing(getJsonString());
-        binding = FragmentBoardBinding.inflate(getLayoutInflater());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBoardList();
+    }
 }
