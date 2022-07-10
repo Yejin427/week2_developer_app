@@ -1,6 +1,7 @@
 package com.example.week2_developer_app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +35,14 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(viewType == 1) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chatmsgmy, parent, false);
+            view = inflater.inflate(R.layout.item_chatmsgmy, parent, false);
             return new ViewHoldermy(view);
         }
         else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chatmsgoppo, parent, false);
+            view =  inflater.inflate(R.layout.item_chatmsgoppo, parent, false);
             return new ViewHolderoppo(view);
         }
     }
@@ -78,16 +81,25 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        if(holder instanceof ViewHoldermy){
+        if(holder instanceof ViewHoldermy) {
             ((ViewHoldermy) holder).msg_id.setText(Integer.toString(chatmsgs.get(position).getMsg_id()));
+            Log.d("확인", chatmsgs.get(position).getMsg());
+            ((ViewHoldermy) holder).msg.setText(chatmsgs.get(position).getMsg());
+            ((ViewHoldermy) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHoldermy) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHoldermy) holder).regdata.setText(chatmsgs.get(position).getRegdata());
+            Log.d("debug", "안녕하세요22");
         }
-        if(holder instanceof ViewHolderoppo){
+        else {
             ((ViewHolderoppo) holder).msg_id.setText(Integer.toString(chatmsgs.get(position).getMsg_id()));
+            Log.d("확인", chatmsgs.get(position).getMsg());
+            ((ViewHolderoppo) holder).msg.setText(chatmsgs.get(position).getMsg());
+            ((ViewHolderoppo) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHolderoppo) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHolderoppo) holder).regdata.setText(chatmsgs.get(position).getRegdata());
         }
+        Log.d("debug", "안녕하세요");
+
     }
 
     @Override
@@ -102,6 +114,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     static class ViewHoldermy extends RecyclerView.ViewHolder {
 
         TextView msg_id;
+        TextView msg;
         TextView chat_id;
         TextView name;
         ImageButton imagebtn;
@@ -110,6 +123,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ViewHoldermy(@NonNull View itemView) {
             super(itemView);
             chat_id = (TextView) itemView.findViewById(R.id.chat_id);
+            msg = (TextView) itemView.findViewById(R.id.msg);
             msg_id = (TextView) itemView.findViewById(R.id.msg_id);
             imagebtn = (ImageButton) itemView.findViewById(R.id.imagebtn);
             name = (TextView) itemView.findViewById(R.id.name);
@@ -120,6 +134,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     static class ViewHolderoppo extends RecyclerView.ViewHolder {
 
         TextView msg_id;
+        TextView msg;
         TextView chat_id;
         TextView name;
         ImageButton imagebtn;
@@ -128,6 +143,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ViewHolderoppo(@NonNull View itemView) {
             super(itemView);
             chat_id = (TextView) itemView.findViewById(R.id.chat_id);
+            msg = (TextView) itemView.findViewById(R.id.msg);
             msg_id = (TextView) itemView.findViewById(R.id.msg_id);
             imagebtn = (ImageButton) itemView.findViewById(R.id.imagebtn);
             name = (TextView) itemView.findViewById(R.id.name);

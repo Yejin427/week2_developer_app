@@ -11,6 +11,7 @@ import com.kakao.auth.Session;
 import com.kakao.sdk.user.UserApi;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.Account;
+import com.kakao.util.helper.Utility;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +38,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.login);
 
         loginbtn = (Button)findViewById(R.id.button);
-
+        Log.d("TAG", Utility.getKeyHash(this));
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
