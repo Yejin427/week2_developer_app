@@ -1,6 +1,7 @@
 package com.example.week2_developer_app;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.example.week2_developer_app.databinding.AddBoardBinding;
 import com.example.week2_developer_app.databinding.FragmentBoardBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,11 +35,15 @@ public class EditBoard extends AppCompatActivity {
         BoardApi boardapi = RetrofitClient.getClient().create(BoardApi.class);
         final String[] type = {null};
         //String picture = null;
+        Drawable selected = (Drawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.roundbutton_selected);
+        Drawable notselected = (Drawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.roundbutton_notselected);
         //질문 게시글 선택
         binding.question.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 type[0] = "Question";
+                binding.question.setBackground(selected);
+                binding.info.setBackground(notselected);
             }
         });
         //정보 게시글 선택
@@ -45,6 +51,8 @@ public class EditBoard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 type[0] = "Info";
+                binding.question.setBackground(notselected);
+                binding.info.setBackground(selected);
             }
         });
         //나가기 버튼
