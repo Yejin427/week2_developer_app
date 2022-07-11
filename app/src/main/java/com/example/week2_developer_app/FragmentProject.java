@@ -166,7 +166,6 @@ public class FragmentProject extends Fragment implements Listener {
                 getmyProjectlist(1);
                 binding.deletebtn.setVisibility(View.INVISIBLE);
                 binding.backbtn.setVisibility(View.VISIBLE);
-
                 adapter.setOnItemClicklistener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterProject.ViewHolder holder, View v, int pos) {

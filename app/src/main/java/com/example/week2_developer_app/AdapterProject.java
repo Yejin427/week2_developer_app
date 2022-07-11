@@ -150,7 +150,7 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
 
         public ViewHolder(@NonNull View itemView,final OnItemClickListener listener) {
             super(itemView);
-            //project_id = (TextView) itemView.findViewById(R.id.proj_id);
+            project_id = (TextView) itemView.findViewById(R.id.proj_id);
             viewType = (TextView) itemView.findViewById(R.id.viewType);
             imagebtn = (ImageButton) itemView.findViewById(R.id.imagebtn);
             title = (TextView) itemView.findViewById(R.id.title);
@@ -187,8 +187,8 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
             title.setText(project.gettitle());
             field.setText(project.getfield());
             language.setText(project.getlanguage());
-            level.setText(project.getlevel());
-            headcount.setText(project.getheadcount());
+            level.setText(Integer.toString(project.getlevel()));
+            headcount.setText(Integer.toString(project.getheadcount()));
             String prd = parseRegData(project.getregdata());
             regdata.setText(prd);
             writer.setText(project.getwriter());
