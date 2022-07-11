@@ -83,23 +83,19 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if(holder instanceof ViewHoldermy) {
             ((ViewHoldermy) holder).msg_id.setText(Integer.toString(chatmsgs.get(position).getMsg_id()));
-            Log.d("확인", chatmsgs.get(position).getMsg());
             ((ViewHoldermy) holder).msg.setText(chatmsgs.get(position).getMsg());
             ((ViewHoldermy) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHoldermy) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHoldermy) holder).regdata.setText(chatmsgs.get(position).getRegdata());
-            Log.d("debug", "안녕하세요22");
+
         }
         else {
             ((ViewHolderoppo) holder).msg_id.setText(Integer.toString(chatmsgs.get(position).getMsg_id()));
-            Log.d("확인", chatmsgs.get(position).getMsg());
             ((ViewHolderoppo) holder).msg.setText(chatmsgs.get(position).getMsg());
             ((ViewHolderoppo) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHolderoppo) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHolderoppo) holder).regdata.setText(chatmsgs.get(position).getRegdata());
         }
-        Log.d("debug", "안녕하세요");
-
     }
 
     @Override

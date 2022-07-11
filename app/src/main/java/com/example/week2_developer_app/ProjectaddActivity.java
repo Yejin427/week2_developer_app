@@ -55,9 +55,7 @@ public class ProjectaddActivity extends AppCompatActivity {
 
 
                 ProjectApi service =  RetrofitClient.getClient().create(ProjectApi.class);
-
                 Project data = new Project(0, writer, writer_email, title, content, field, level, headcount, language, time, regdata);
-
                 service.addProject(data).enqueue(new Callback<ProjectResponse>(){
                     @Override
                     public void onResponse(Call<ProjectResponse> call, Response<ProjectResponse> response) {
@@ -70,12 +68,15 @@ public class ProjectaddActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }
-
                     @Override
                     public void onFailure(Call<ProjectResponse> call, Throwable t) {
 
                     }
                 });
+
+//                ChatroomApi service2 = RetrofitClient.getClient().create(ChatroomApi.class);
+//                Chatroom data2 = new Chatroom(0, )
+
             }
         });
     }
