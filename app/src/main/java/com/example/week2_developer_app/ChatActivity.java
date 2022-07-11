@@ -19,7 +19,11 @@ import com.example.week2_developer_app.databinding.ActivityChatmsgBinding;
 import com.example.week2_developer_app.databinding.ActivityDetailprojectBinding;
 import com.example.week2_developer_app.databinding.FragmentChatroomBinding;
 import com.kakao.sdk.user.UserApiClient;
+import io.socket.client.IO;
+import io.socket.client.Socket;
 
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +39,8 @@ public class ChatActivity extends AppCompatActivity {
     private String name;
     private String email;
     private int chat_id;
+
+    private Socket mSocket;
     private ActivityChatmsgBinding binding;
 
     private void getChatmsglist(){
@@ -63,6 +69,18 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    private void init() {
+        try {
+            mSocket = IO.socket("http://192.249.19.191:80");
+            mSocket.connect();
+            Log.d("SOCKET", "Connection success : " + mSocket.id());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        mSocket.connect();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
         chat_id = intent.getIntExtra("chat_id", 2);
+
 
 //        binding.topAppBarName.setTitle();
 
@@ -109,7 +128,7 @@ public class ChatActivity extends AppCompatActivity {
         binding.chatmsglistview.setItemAnimator(new DefaultItemAnimator());
         binding.chatmsglistview.setAdapter(adapter);
 
-
+        init();
 
     }
 }
