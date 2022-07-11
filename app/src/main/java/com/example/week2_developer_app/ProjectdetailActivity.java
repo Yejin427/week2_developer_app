@@ -41,7 +41,7 @@ public class ProjectdetailActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
 
         int proj_id = intent.getIntExtra("proj_id" , 0);
-        binding.projId.setText(Integer.toString(intent.getIntExtra("proj_id" , 0)));
+        //binding.projId.setText(Integer.toString(intent.getIntExtra("proj_id" , 0)));
         binding.writer.setText(intent.getStringExtra("writer"));
         binding.writerEmail.setText(intent.getStringExtra("writer_email"));
         binding.title.setText(intent.getStringExtra("title"));

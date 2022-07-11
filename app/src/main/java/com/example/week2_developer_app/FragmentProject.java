@@ -16,20 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.week2_developer_app.databinding.ActivityMainBinding;
 import com.example.week2_developer_app.databinding.FragmentProjectBinding;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,8 +119,7 @@ public class FragmentProject extends Fragment implements Listener {
         });
 
         binding.projectlistview.setHasFixedSize(true);
-        binding.projectlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
-
+        //binding.projectlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
         adapter = new AdapterProject(projectlist);
         binding.projectlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.projectlistview.setItemAnimator(new DefaultItemAnimator());
