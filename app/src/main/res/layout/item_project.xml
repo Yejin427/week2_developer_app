@@ -7,83 +7,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/round_border">
 
-    <!-- Basic Page back ground Color F5F8FD -->
-    <ImageButton
-        android:id="@+id/imagebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop = "5dp"
-        android:layout_marginLeft = "5dp"
-        android:background="#FFFFFF"
-        android:src = "@drawable/icon_dot"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/viewType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:text = "0"
-        android:visibility="invisible"
-        android:fontFamily="@font/applesdgothicneob"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/proj_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:text = "0"
-        android:visibility="invisible"
-        android:fontFamily="@font/applesdgothicneob"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/applesdgothicneob"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="10dp"
+        android:text="유니티로 게임 같이 만들사람!"
         android:textColor="#000000"
-        android:textSize="15dp"
-        android:text = "개발 같이 해요, 개같이"
-        android:fontFamily="@font/applesdgothicneob"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/information"
+        android:id="@+id/field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingTop="0dp"
         android:paddingBottom="5dp"
         android:textColor="#666666"
-        android:text = "분야 : 앱개발 / 언어 : java / 예상난이도 : 쉬움 / 모집인원 : (2/4)"
-        android:textSize="10dp"
+        android:text = "개발 분야: 흥"
+        android:textSize="12dp"
         android:fontFamily="@font/applesdgothicneol"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        />
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="5dp"
+        android:textColor="#666666"
+        android:text = "개발 언어: 칫"
+        android:textSize="12dp"
+        android:fontFamily="@font/applesdgothicneol"
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@+id/field" />
 
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="5dp"
+        android:textColor="#666666"
+        android:text = "개발 수준: 뿡"
+        android:textSize="12dp"
+        android:fontFamily="@font/applesdgothicneol"
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/language" />
+
+    <TextView
+        android:id="@+id/headcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="5dp"
+        android:textColor="#666666"
+        android:text = "모집 인원: 야"
+        android:textSize="12dp"
+        android:fontFamily="@font/applesdgothicneol"
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/level" />
+
+    <TextView
+        android:id="@+id/regdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/applesdgothicneol"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingRight="10dp"
+        android:text="2022-07-10 14:57"
+        android:textColor="#666666"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/headcount" />
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="20dp"
+        android:background="@color/material_dynamic_neutral40"
+        app:layout_constraintLeft_toRightOf="@id/regdata"
+        app:layout_constraintTop_toTopOf="@id/regdata"/>
+
+    <TextView
+        android:id="@+id/writer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/regdata"
+        app:layout_constraintTop_toTopOf="@id/regdata"
+        android:text="익명"
+        android:fontFamily="@font/applesdgothicneol"
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingRight="10dp"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:id="@+id/proj_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imagebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        app:layout_constraintTop_toTopOf="@id/title"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/icon_profile"
+        android:background="#ffffff"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,6 +56,14 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_project" />
 
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:src="@drawable/icon_back"
+                android:visibility="invisible" />
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </FrameLayout>
@@ -72,21 +80,6 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintVertical_bias="0.8"
         android:src = "@drawable/icon_remove"
-        />
-
-    <ImageButton
-        android:id="@+id/backbtn"
-        android:background = "#00000000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintVertical_bias="0.8"
-        android:visibility = "invisible"
-        android:src = "@drawable/icon_back"
         />
 
 

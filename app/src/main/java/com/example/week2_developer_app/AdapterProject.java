@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -138,17 +139,27 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
 
         TextView title;
         TextView project_id;
-        TextView information;
+        TextView field;
+        TextView language;
+        TextView level;
+        TextView headcount;
         ImageButton imagebtn;
         TextView viewType;
+        TextView regdata;
+        TextView writer;
 
         public ViewHolder(@NonNull View itemView,final OnItemClickListener listener) {
             super(itemView);
-            project_id = (TextView) itemView.findViewById(R.id.proj_id);
+            //project_id = (TextView) itemView.findViewById(R.id.proj_id);
             viewType = (TextView) itemView.findViewById(R.id.viewType);
             imagebtn = (ImageButton) itemView.findViewById(R.id.imagebtn);
             title = (TextView) itemView.findViewById(R.id.title);
-            information = (TextView) itemView.findViewById(R.id.information);
+            field = (TextView) itemView.findViewById(R.id.field);
+            language = (TextView) itemView.findViewById(R.id.language);
+            level = (TextView) itemView.findViewById(R.id.level);
+            headcount = (TextView) itemView.findViewById(R.id.headcount);
+            regdata = (TextView) itemView.findViewById(R.id.regdata);
+            writer = (TextView) itemView.findViewById(R.id.writer);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -171,16 +182,25 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
                 imagebtn.setImageResource(R.drawable.icon_bin);
                 viewType.setText(Integer.toString(viewtype));
             }
-            Log.d("str", ""+project.getproj_id());
+            //Log.d("str", ""+project.getproj_id());
             project_id.setText(Integer.toString(project.getproj_id()));
             title.setText(project.gettitle());
-            String str = "분야 : " + project.getfield()
-                    + " / 언어 : " + project.getlanguage()
-                    + " / 예상수준 : " + project.getlevel()
-                    + " / 모집인원 : " + project.getheadcount() ;
-            information.setText(str);
+            field.setText(project.getfield());
+            language.setText(project.getlanguage());
+            level.setText(project.getlevel());
+            headcount.setText(project.getheadcount());
+            String prd = parseRegData(project.getregdata());
+            regdata.setText(prd);
+            writer.setText(project.getwriter());
         }
-
+        public String parseRegData(String regdata){
+            String year = regdata.substring(0, 4);
+            String month = regdata.substring(4, 6);
+            String day = regdata.substring(6, 8);
+            String hour = regdata.substring(8, 10);
+            String minute = regdata.substring(10, 12);
+            return year+"-"+month+"-"+day+" "+hour+":"+minute;
+        }
     }
     public void setItems(ArrayList<Project> projects){
         this.projects = projects;
@@ -191,5 +211,6 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
     public void setItem(int position, Project project){
         projects.set(position, project);
     }
+
 }
 
