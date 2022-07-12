@@ -1,5 +1,6 @@
 package com.example.week2_developer_app;
 
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -10,6 +11,7 @@ public class RetrofitClient {
 
     private RetrofitClient() {
     }
+
 
     public static Retrofit getClient() {
         if (retrofit == null) {

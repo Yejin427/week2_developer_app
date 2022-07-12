@@ -26,21 +26,18 @@ public class JoinBoardData {
         @SerializedName("regdata")
         private String regdata;
 
-//        @SerializedName("picture")
-//        private String picture;
+        @SerializedName("picture")
+        private String picture;
 
-        public AddData(String writer_email, String writer, String type, String title, String content, String regdata) {
+        public AddData(String writer_email, String writer, String type, String title, String content, String regdata, String picture) {
             this.writer_email = writer_email;
             this.writer = writer;
             this.type = type;
             this.title = title;
             this.content = content;
             this.regdata = regdata;
-            //this.picture = picture;
+            this.picture = picture;
         }
-    }
-    public static class GetData{
-        public GetData(){}
     }
     public static class DeleteData{
         @SerializedName("doc_id")
@@ -71,5 +68,12 @@ class JoinBoardResponse {
             return code;
         }
     }
+    public class PictureResponse{
+        @SerializedName("path")
+        private String path;
 
+        public String getPictureUri(){
+            return "192.249.19.191:80/"+path;
+        }
+    }
 }

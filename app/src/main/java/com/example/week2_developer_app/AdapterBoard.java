@@ -1,6 +1,7 @@
 package com.example.week2_developer_app;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,9 +121,18 @@ public class AdapterBoard extends RecyclerView.Adapter<AdapterBoard.boardViewHol
         void onBind(Board board){
             title.setText(board.getTitle());
             contents.setText(board.getContents().substring(0,1));
-            regDate.setText(board.getRegdata());
+            regDate.setText(parseRegData(board.getRegdata()));
             writer.setText(board.getWriter());
-            //imageView.setImageDrawable(board.getPicture());
+            imageView.setImageURI(Uri.parse(board.getPicture()));
+        }
+
+        public String parseRegData(String regdata){
+            String year = regdata.substring(0, 4);
+            String month = regdata.substring(4, 6);
+            String day = regdata.substring(6, 8);
+            String hour = regdata.substring(8, 10);
+            String minute = regdata.substring(10, 12);
+            return year+"-"+month+"-"+day+" "+hour+":"+minute;
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.week2_developer_app;
 
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,7 +17,10 @@ public class Board {
     private ArrayList<Comment> commentList;
     private int likes;
     private String regdata;
-    private Drawable picture;
+    @SerializedName("picture")
+    private String picture;     //uri
+    @SerializedName("type")
+    private String type;
 
     public Board(String title, String contents, String writer, String writer_email, String regdata){
         this.title = title;
@@ -28,7 +31,7 @@ public class Board {
         commentList = new ArrayList<>();
         likes = 0;
     }
-    public void setPicture(Drawable picture){
+    public void setPicture(String picture){
         this.picture = picture;
     }
     public int getId(){
@@ -53,7 +56,6 @@ public class Board {
     public String getRegdata(){
         return regdata;
     }
-    public Drawable getPicture(){
-        return picture;
-    }
+    public String getPicture(){return picture;}
+    public String getType(){return type;}
 }

@@ -65,7 +65,8 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/question"
             android:hint="내용을 입력하세요" />
-   </RelativeLayout>
+
+    </RelativeLayout>
 
     <ImageButton
         android:id="@+id/exit"
@@ -74,6 +75,9 @@
         android:layout_marginBottom="10dp"
         android:layout_width="20dp"
         android:layout_height="0dp"
+        android:background="#ffffff"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:layout_constraintLeft_toLeftOf="@id/edit"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/edit" />
@@ -86,6 +90,9 @@
         android:layout_marginBottom="10dp"
         android:layout_marginRight="20dp"
         android:src="@drawable/icon_ok"
+        android:background="#ffffff"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@id/edit"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,9 +104,25 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/imageadd"
         android:src="@drawable/icon_add"
+        android:background="#ffffff"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/edit"
         app:layout_constraintRight_toLeftOf="@id/sendbutton"
         android:layout_marginRight="10dp"/>
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        app:layout_constraintRight_toLeftOf="@id/imageadd"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
