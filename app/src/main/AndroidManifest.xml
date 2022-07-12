@@ -47,12 +47,14 @@
         </activity>
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SignupActivity"
+            android:theme = "@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".ProjectaddActivity"
             android:theme = "@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity android:name=".EditBoard"></activity>
         <activity android:name=".DetailBoard"
+            android:theme = "@style/Theme.AppCompat.NoActionBar">
             android:windowSoftInputMode ="adjustPan"></activity>
         <activity android:name=".ProjectdetailActivity"
             android:theme = "@style/Theme.AppCompat.NoActionBar"></activity>

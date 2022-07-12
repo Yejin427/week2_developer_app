@@ -23,6 +23,7 @@
 
     <TextView
         android:id="@+id/contents"
+        android:visibility="invisible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/applesdgothicneob"
@@ -39,14 +40,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/applesdgothicneob"
+        android:paddingLeft="7dp"
         android:text="2022-07-12 15:36"
         android:textColor="#dddddd"
         android:textSize="15dp"
-        android:paddingLeft="7dp"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="79dp"
         app:layout_constraintLeft_toRightOf="@id/writer"
-        app:layout_constraintTop_toBottomOf="@id/contents"/>
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
     <TextView
@@ -54,12 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/applesdgothicneob"
-        android:text="홍길동"
-        android:textSize="15dp"
-        android:textColor="#aaaaaa"
         android:paddingLeft="5dp"
+        android:text="홍길동"
+        android:textColor="#aaaaaa"
+        android:textSize="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contents" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageView
         android:id="@+id/boardimage"
