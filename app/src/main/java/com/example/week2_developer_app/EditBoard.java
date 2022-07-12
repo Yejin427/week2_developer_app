@@ -116,7 +116,6 @@ public class EditBoard extends AppCompatActivity {
                         Log.d("str", ""+result.get(0).getDoc_id());
 
                         if(photoUri != null) {
-
                             Log.d("확인" , mediaPath);
                             File file = new File(mediaPath);
 
@@ -174,7 +173,7 @@ public class EditBoard extends AppCompatActivity {
                 String[] proj = { MediaStore.Images.Media.DATA };
                 Cursor cursor = getContentResolver().query(photoUri, proj, null, null, null);
                 cursor.moveToNext();
-                mediaPath = cursor.getString(cursor.getColumnIndex("_data"));
+                mediaPath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
                 cursor.close();
 //                Cursor cursor = getContentResolver().query(Uri.parse(photoUri.toString()), null, null, null, null);
 //                assert cursor != null;
