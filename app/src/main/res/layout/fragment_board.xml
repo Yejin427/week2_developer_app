@@ -34,8 +34,6 @@
         app:layout_constraintTop_toBottomOf="@+id/topappbarlayout">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/refreshBoard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -55,10 +53,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/addbtn"
         android:src="@drawable/icon_add"
+        android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="50dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
