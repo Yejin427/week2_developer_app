@@ -29,6 +29,7 @@ import com.google.gson.annotations.SerializedName;
 import com.kakao.sdk.user.UserApiClient;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,10 +54,12 @@ public class ChatActivity extends Activity {
     private String name;
     private String email;
     private int chat_id;
+    private String chat_name;
+    private String type;
+    private String regdata;
     private Socket mSocket;
-
-    private Boolean isConnected = true;
     private ActivityChatmsgBinding binding;
+    private ArrayList<String> connectedlist = new ArrayList<>();
 
     private void getChatmsglist(){
 
@@ -69,8 +72,12 @@ public class ChatActivity extends Activity {
 
                 chatmsglist.clear();
                 for(int i=0; i < response.body().size() ;i++){
+
                     if(response.body().get(i).getSender_name().equals(name))
                         response.body().get(i).setviewType(1);
+                    if(connectedlist.contains(response.body().get(i).getSender_name())) {
+                        response.body().get(i).setConnected(1);
+                    }
                     chatmsglist.add(response.body().get(i));
                 }
                 adapter.notifyDataSetChanged();
@@ -80,7 +87,6 @@ public class ChatActivity extends Activity {
             }
             @Override
             public void onFailure(Call<List<Chatmsg>> call, Throwable t) {
-
             }
         });
     }
@@ -96,16 +102,22 @@ public class ChatActivity extends Activity {
         binding = ActivityChatmsgBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
         chat_id = intent.getIntExtra("chat_id", 2);
+        chat_name = intent.getStringExtra("chat_name");
+        type = intent.getStringExtra("type");
+        regdata = intent.getStringExtra("regdata");
+
+
+        binding.topAppBarName.setTitle(chat_name);
 
         getChatmsglist();
 
         GlobalApplication app = (GlobalApplication)getApplication();
         mSocket = app.getSocket();
-
         mSocket.on("connection", onConnection);
         mSocket.on("disconnection", onDisConnection);
         mSocket.on("new message", onNewMessage);
@@ -113,6 +125,9 @@ public class ChatActivity extends Activity {
 
         mSocket.connect();
         mSocket.emit("connection", chat_id, name, email);
+
+        if(type.equals("new"))
+            mSocket.emit("new message", "안녕하세요, "+name+ "입니다.", chat_id, name, regdata);
 
         //이후 서버에서 io.emit("new message", ,msg객체);
 
@@ -166,10 +181,8 @@ public class ChatActivity extends Activity {
         binding.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String addmsg = binding.addmsg.getText().toString();
                 String regdata = convertTimestampTodate(System.currentTimeMillis());
-                Chatmsg msg = new Chatmsg(0, addmsg, chat_id, name, regdata);
                 mSocket.emit("new message",addmsg, chat_id, name, regdata);
                 binding.addmsg.setText("");
             }
@@ -193,7 +206,6 @@ public class ChatActivity extends Activity {
         mSocket.off("connection", onConnection);
         mSocket.off("disconnection", onDisConnection);
         mSocket.off("new message", onNewMessage);
-//        mSocket.off("typing", onTyping);
 
         finish();   //현재 액티비티 종료
     }
@@ -212,9 +224,19 @@ public class ChatActivity extends Activity {
                 public void run() {
                     String username = (String) args[0];
                     String useremail = (String) args[1];
+                    JSONArray connectedlistjson = (JSONArray) args[2];
 
-                    //adatper를 하나 건드려서 imagebtn on 하고, chat다시불러오기
+                    connectedlist.clear();
+                    for(int i=0 ; i<connectedlistjson.length() ; i++){
+                        try {
+                            connectedlist.add(connectedlistjson.getString(i));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    getChatmsglist();
+                    Log.d("접속중인 사람 확인", connectedlist.toString());
                     Log.d("접속", username);
                     Log.d("접속", useremail);
                 }
@@ -230,9 +252,19 @@ public class ChatActivity extends Activity {
                 public void run() {
                     String username = (String) args[0];
                     String useremail = (String) args[1];
+                    JSONArray connectedlistjson = (JSONArray) args[2];
 
-                    //adatper를 하나 건드려서 imagebtn off하고, chat다시불러오기
+                    connectedlist.clear();
+                    for(int i=0 ; i<connectedlistjson.length() ; i++){
+                        try {
+                            connectedlist.add(connectedlistjson.getString(i));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    getChatmsglist();
+                    Log.d("접속중인 사람 확인", connectedlist.toString());
                     Log.d("접속해제", username);
                     Log.d("접속해제", useremail);
                 }

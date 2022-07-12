@@ -19,7 +19,7 @@
         android:layout_marginTop = "5dp"
         android:layout_marginRight = "5dp"
         android:background="#FFFFFF"
-        android:src = "@drawable/icon_profile"
+        android:src = "@drawable/icon_dot"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

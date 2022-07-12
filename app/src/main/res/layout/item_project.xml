@@ -113,12 +113,12 @@
         app:layout_constraintLeft_toLeftOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/headcount" />
 
-    <View
-        android:layout_width="0.5dp"
-        android:layout_height="20dp"
-        android:background="@color/material_dynamic_neutral40"
-        app:layout_constraintLeft_toRightOf="@id/regdata"
-        app:layout_constraintTop_toTopOf="@id/regdata"/>
+<!--    <View-->
+<!--        android:layout_width="0.5dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:background="@color/material_dynamic_neutral40"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/regdata"-->
+<!--        app:layout_constraintTop_toTopOf="@id/regdata"/>-->
 
     <TextView
         android:id="@+id/writer"

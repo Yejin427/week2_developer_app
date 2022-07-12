@@ -28,6 +28,11 @@ public class ProjectdetailActivity extends AppCompatActivity {
     private String email;
 
     ActivityDetailprojectBinding binding;
+    private String convertTimestampTodate(long time){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String date = sdf.format(time);
+        return date;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,43 @@ public class ProjectdetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+
+        binding.btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String regdata = convertTimestampTodate(System.currentTimeMillis());
+                ChatroomApi service = RetrofitClient.getClient().create(ChatroomApi.class);
+                Call<ChatroomResponse> call = service.addChatroommember(new Chatroom_memberData(proj_id, name, email, regdata));
+                call.enqueue(new Callback<ChatroomResponse>() {
+                    @Override
+                    public void onResponse(Call<ChatroomResponse> call, Response<ChatroomResponse> response) {
+
+                        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                        intent.putExtra("name", name);
+                        intent.putExtra("email", email);
+                        intent.putExtra("chat_id", proj_id);
+
+                        if(response.body().getCode() == 404) {
+                            intent.putExtra("type", "new");
+                            intent.putExtra("regdata", regdata);
+                            intent.putExtra("chat_name", intent.getStringExtra("title"));
+                        }
+                        else{
+                            intent.putExtra("type", "no");
+                            intent.putExtra("regdata", "old");
+                            intent.putExtra("chat_name", intent.getStringExtra("title"));
+                        }
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onFailure(Call<ChatroomResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT);
+                    }
+                });
             }
         });
 

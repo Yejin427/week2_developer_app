@@ -22,8 +22,8 @@
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/layout.xml" value="0.19067028985507245" />
         <entry key="..\:/Users/yejin/Documents/GitHub/madcamp/week2_developer_app/app/src/main/res/layout/login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_addproject.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_chatmsg.xml" value="0.264825439453125" />
-        <entry key="app/src/main/res/layout/activity_detailproject.xml" value="0.35597826086956524" />
+        <entry key="app/src/main/res/layout/activity_chatmsg.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_detailproject.xml" value="0.3982727725948908" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2911458333333333" />
         <entry key="app/src/main/res/layout/add_board.xml" value="0.21105072463768115" />
@@ -44,6 +44,7 @@
         <entry key="app/src/main/res/layout/item_project.xml" value="0.23964843750000003" />
         <entry key="app/src/main/res/layout/login.xml" value="0.2911458333333333" />
         <entry key="app/src/main/res/layout/projectdelete_dialog.xml" value="0.271286231884058" />
+        <entry key="app/src/main/res/layout/tmp.xml" value="0.3890625" />
       </map>
     </option>
   </component>

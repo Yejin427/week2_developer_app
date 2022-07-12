@@ -24,11 +24,13 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<Chatmsg> chatmsgs = new ArrayList<Chatmsg>();
     private ArrayList<Chatmsg> chatmsgs_list = new ArrayList<Chatmsg>();
 
+
     public AdapterChatmsg(ArrayList<Chatmsg> myData){
         this.context = context;
         this.chatmsgs_filtered = myData;
         this.chatmsgs = myData;
         this.chatmsgs_list.addAll(myData);
+
     }
 
     @NonNull
@@ -87,6 +89,8 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHoldermy) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHoldermy) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHoldermy) holder).regdata.setText(chatmsgs.get(position).getRegdata());
+            if(chatmsgs.get(position).getConnected() == 1)
+                ((ViewHoldermy) holder).imagebtn.setImageResource(R.drawable.icon_profile);
 
         }
         else {
@@ -95,6 +99,8 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHolderoppo) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHolderoppo) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHolderoppo) holder).regdata.setText(chatmsgs.get(position).getRegdata());
+            if(chatmsgs.get(position).getConnected() == 1)
+                ((ViewHolderoppo) holder).imagebtn.setImageResource(R.drawable.icon_profile);
         }
     }
 

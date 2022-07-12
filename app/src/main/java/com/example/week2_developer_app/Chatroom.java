@@ -13,34 +13,22 @@ public class Chatroom {
 
     @SerializedName("chat_id")
     private int chat_id;
-    @SerializedName("email_1")
-    private String email_1;
-    @SerializedName("name_1")
-    private String name_1;
-    @SerializedName("email_2")
-    private String email_2;
-    @SerializedName("name_2")
-    private String name_2;
+    @SerializedName("chat_name")
+    private String chat_name;
     @SerializedName("lastchat")
     private String lastchat;
     @SerializedName("regdata")
     private String regdata;
 
-    public Chatroom(int chat_id, String email_1, String name_1, String email_2, String name_2,String lastchat, String regdata){
+    public Chatroom(int chat_id, String chat_name, String lastchat, String regdata){
         this.chat_id = chat_id;
-        this.email_1 = email_1;
-        this.name_1 = name_1;
-        this.email_2 = email_2;
-        this.name_2 = name_2;
+        this.chat_name = chat_name;
         this.lastchat = lastchat;
         this.regdata = regdata;
     }
 
     public int getChat_id() { return chat_id; }
-    public String getEmail_1() {return email_1; }
-    public String getName_1() {return name_1; }
-    public String getEmail_2() {return email_2; }
-    public String getName_2() {return name_2; }
+    public String getChat_name() {return chat_name;}
     public String getLastchat() { return lastchat;}
     public String getRegdata() { return regdata;}
 }
@@ -49,8 +37,8 @@ public class Chatroom {
 interface ChatroomApi{
     @POST("/user/getchatroom")
     Call<List<Chatroom>> getChatroom(@Body Chatroom_myData data);
-    @POST("/user/addchatroom")
-    Call<ChatroomResponse> addChatroom(@Body Chatroom chatroom);
+    @POST("/user/addchatroommember")
+    Call<ChatroomResponse> addChatroommember(@Body Chatroom_memberData data);
 }
 
 class Chatroom_myData{
@@ -60,6 +48,25 @@ class Chatroom_myData{
         this.email = email;
     }
 }
+
+class Chatroom_memberData{
+    @SerializedName("chat_id")
+    int chat_id;
+    @SerializedName("name")
+    String name;
+    @SerializedName("email")
+    String email;
+    @SerializedName("regdata")
+    String regdata;
+
+    public Chatroom_memberData(int chat_id, String name, String email, String regdata){
+        this.chat_id = chat_id;
+        this.name = name;
+        this.email = email;
+        this.regdata = regdata;
+    }
+}
+
 class ChatroomResponse {
     @SerializedName("code")
     private int code;

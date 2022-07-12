@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.kakao.auth.Session;
@@ -29,7 +30,7 @@ import retrofit2.Retrofit;
 import retrofit2.http.Url;
 
 public class IntroActivity extends AppCompatActivity {
-    private Button loginbtn;
+    private ImageButton loginbtn;
     ArrayList<String> userinfo = new ArrayList<String>();
 
     @Override
@@ -37,7 +38,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        loginbtn = (Button)findViewById(R.id.button);
+        loginbtn = (ImageButton)findViewById(R.id.button);
         Log.d("TAG", Utility.getKeyHash(this));
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

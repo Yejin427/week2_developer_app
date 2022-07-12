@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHolder> implements OnItemClickListener2, Filterable{
@@ -23,16 +24,14 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
     private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
     private ArrayList<Chatroom> chatrooms_list = new ArrayList<Chatroom>();
     private static OnItemClickListener2 listener;
-    private String self_name;
     int viewtype = 0;
 
-    public AdapterChatroom(ArrayList<Chatroom> myData, String name){
+    public AdapterChatroom(ArrayList<Chatroom> myData){
         this.context = context;
         this.chatrooms_filtered = myData;
         this.chatrooms = myData;
         this.chatrooms_list.addAll(myData);
         this.viewtype = 0;
-        this.self_name = name;
     }
 
     public void setViewtype(int type){
@@ -62,13 +61,8 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
                     ArrayList<Chatroom> filteringList = new ArrayList<>();
                     for(Chatroom chatroom : chatrooms_list) {
 
-                        String oppo_name;
-                        if(self_name.equals(chatroom.getName_1()))
-                            oppo_name = chatroom.getName_2();
-                        else
-                            oppo_name = chatroom.getName_1();
                         if(
-                            oppo_name.contains(charString.toLowerCase())
+                            chatroom.getChat_name().toLowerCase().contains(charString.toLowerCase())
                         ) {
                             filteringList.add(chatroom);
                         }
@@ -92,7 +86,7 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.onBind(chatrooms.get(position), viewtype, self_name);
+        holder.onBind(chatrooms.get(position), viewtype);
     }
 
     public void setFriendList(ArrayList<Chatroom> list){
@@ -129,7 +123,7 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
 
         TextView lastchat;
         TextView chat_id;
-        TextView oppo_name;
+        TextView chat_name;
         ImageButton imagebtn;
         TextView viewType;
         TextView regdata;
@@ -139,7 +133,7 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
             chat_id = (TextView) itemView.findViewById(R.id.chat_id);
             viewType = (TextView) itemView.findViewById(R.id.viewType);
             imagebtn = (ImageButton) itemView.findViewById(R.id.imagebtn);
-            oppo_name = (TextView) itemView.findViewById(R.id.oppo_name);
+            chat_name = (TextView) itemView.findViewById(R.id.chat_name);
             lastchat = (TextView) itemView.findViewById(R.id.lastchat);
             regdata = (TextView) itemView.findViewById(R.id.regdata);
 
@@ -158,21 +152,14 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
             });
         }
 
-        void onBind(Chatroom chatroom, int viewtype, String self_name) {
+        void onBind(Chatroom chatroom, int viewtype) {
 
             if(viewtype == 1) {
                 imagebtn.setImageResource(R.drawable.icon_bin);
                 viewType.setText(Integer.toString(viewtype));
             }
-
-            String oppo_name2;
-            if(self_name.equals(chatroom.getName_1()))
-                oppo_name2 = chatroom.getName_2();
-            else
-                oppo_name2 = chatroom.getName_1();
-
             chat_id.setText(Integer.toString(chatroom.getChat_id()));
-            oppo_name.setText(oppo_name2);
+            chat_name.setText(chatroom.getChat_name());
             lastchat.setText(chatroom.getLastchat());
             regdata.setText(chatroom.getRegdata());
 

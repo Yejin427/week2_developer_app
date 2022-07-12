@@ -54,7 +54,7 @@ public class FragmentChatroom extends Fragment implements Listener {
                 chatroomlist.addAll(response.body());
 
                 adapter.notifyDataSetChanged();
-                adapter = new AdapterChatroom(chatroomlist, name);
+                adapter = new AdapterChatroom(chatroomlist);
                 binding.chatlistview.setAdapter(adapter);
             }
             @Override
@@ -98,7 +98,7 @@ public class FragmentChatroom extends Fragment implements Listener {
         binding.chatlistview.setHasFixedSize(true);
         binding.chatlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 
-        adapter = new AdapterChatroom(chatroomlist, name);
+        adapter = new AdapterChatroom(chatroomlist);
         binding.chatlistview.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.chatlistview.setItemAnimator(new DefaultItemAnimator());
         binding.chatlistview.setAdapter(adapter);
@@ -112,6 +112,9 @@ public class FragmentChatroom extends Fragment implements Listener {
                 intent.putExtra("name", name);
                 intent.putExtra("email", email);
                 intent.putExtra("chat_id", obj.getChat_id());
+                intent.putExtra("chat_name", obj.getChat_name());
+                intent.putExtra("type", "no");
+                intent.putExtra("regdata", "old");
                 startActivity(intent);
             }
         });

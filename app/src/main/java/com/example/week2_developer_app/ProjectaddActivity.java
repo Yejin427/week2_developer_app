@@ -41,7 +41,7 @@ public class ProjectaddActivity extends AppCompatActivity {
         projectaddbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final int[] newProj_id = new int[1];
                 String writer = name;
                 String writer_email = email;
                 String title = ((EditText)findViewById(R.id.title)).getText().toString();
@@ -61,6 +61,7 @@ public class ProjectaddActivity extends AppCompatActivity {
                     public void onResponse(Call<ProjectResponse> call, Response<ProjectResponse> response) {
                         ProjectResponse result = response.body();
                         if(result.getCode() == 200) {
+                            newProj_id[0] = result.getid();
                             Toast.makeText(getApplicationContext(), "추가되었습니다!", Toast.LENGTH_SHORT);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.putExtra("name", name);
@@ -70,9 +71,11 @@ public class ProjectaddActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<ProjectResponse> call, Throwable t) {
-
+                        recreate();
                     }
                 });
+
+
 
 //                ChatroomApi service2 = RetrofitClient.getClient().create(ChatroomApi.class);
 //                Chatroom data2 = new Chatroom(0, )

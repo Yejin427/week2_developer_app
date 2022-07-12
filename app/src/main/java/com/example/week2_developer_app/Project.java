@@ -95,6 +95,12 @@ class ProjectResponse {
     public int getCode() {
         return code;
     }
+
+    @SerializedName("proj_id")
+    private int proj_id;
+    public int getid() {
+        return proj_id;
+    }
 }
 
 class ProjectResponse_id {

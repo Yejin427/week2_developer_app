@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/oppo_name"
+        android:id="@+id/chat_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
@@ -81,7 +81,7 @@
         android:fontFamily="@font/applesdgothicneol"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imagebtn"
-        app:layout_constraintTop_toBottomOf="@+id/oppo_name"
+        app:layout_constraintTop_toBottomOf="@+id/chat_name"
         />
 
     <TextView
@@ -97,9 +97,10 @@
         android:fontFamily="@font/applesdgothicneol"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintVertical_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/imagebtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oppo_name"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
 

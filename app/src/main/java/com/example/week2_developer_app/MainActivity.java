@@ -77,9 +77,22 @@ public class MainActivity extends FragmentActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragmentProject).commit();
 
         tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("홈"));
-        tabs.addTab(tabs.newTab().setText("게시판"));
-        tabs.addTab(tabs.newTab().setText("채팅"));
+
+        TabLayout.Tab tab1 = tabs.newTab();
+        tab1.setText("프로젝트");
+        tab1.setIcon(R.drawable.icon_project);
+
+        TabLayout.Tab tab2 = tabs.newTab();
+        tab2.setText("게시판");
+        tab2.setIcon(R.drawable.icon_board);
+
+        TabLayout.Tab tab3 = tabs.newTab();
+        tab3.setText("DM");
+        tab3.setIcon(R.drawable.icon_dm);
+
+        tabs.addTab(tab1);
+        tabs.addTab(tab2);
+        tabs.addTab(tab3);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

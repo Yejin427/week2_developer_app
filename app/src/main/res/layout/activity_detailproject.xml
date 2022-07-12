@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
         android:hint="흥칫뿡야~ 흥칫뿡야~"
         android:maxLength="50"
         android:minWidth="380dp"
-        android:minHeight="300dp"
+        android:minHeight="100dp"
         android:textSize="15dp"
         android:src="@drawable/round_border"
         android:fontFamily="@font/applesdgothicneob"
@@ -225,6 +226,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writer_emaila"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -235,10 +237,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="#00000000"
-        android:src="@drawable/icon_phone"
+        android:src="@drawable/icon_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writer_emaila"
         tools:ignore="SpeakableTextPresentCheck"/>
@@ -254,6 +257,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writer_emaila"
         tools:ignore="SpeakableTextPresentCheck" />

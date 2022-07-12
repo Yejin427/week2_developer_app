@@ -21,6 +21,7 @@ public class Chatmsg {
     @SerializedName("regdata")
     private String regdata;
     private int viewType;
+    private int connected;
 
     public Chatmsg(int msg_id, String msg, int chat_id, String sender_name, String regdata){
         this.msg_id = msg_id;
@@ -29,6 +30,7 @@ public class Chatmsg {
         this.sender_name = sender_name;
         this.regdata = regdata;
         this.viewType = 0;
+        this.connected = 0;
     }
 
     public int getMsg_id() { return msg_id; }
@@ -40,6 +42,11 @@ public class Chatmsg {
     public void setviewType(int viewtype){
         this.viewType = viewtype;
     }
+    public int getConnected() { return connected;}
+    public void setConnected(int type){
+        this.connected = type;
+    }
+
 }
 
 interface ChatmsgApi{
@@ -47,6 +54,9 @@ interface ChatmsgApi{
     Call<List<Chatmsg>> getChatmsg(@Body Chatmsg_myData data);
     @POST("/user/addchatmsg")
     Call<ChatmsgResponse> addChatmsg(@Body Chatmsg chatmsg);
+    @POST("/user/getconnected")
+    Call<List<String>> getconnectedlist(@Body Chatmsg_myData data);
+
 }
 
 class Chatmsg_myData{
