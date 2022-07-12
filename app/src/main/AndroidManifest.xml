@@ -53,7 +53,7 @@
         </activity>
         <activity android:name=".EditBoard"></activity>
         <activity android:name=".DetailBoard"
-            android:windowSoftInputMode ="adjustResize"></activity>
+            android:windowSoftInputMode ="adjustPan"></activity>
         <activity android:name=".ProjectdetailActivity"
             android:theme = "@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".ChatActivity"

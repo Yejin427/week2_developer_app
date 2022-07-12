@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
+    android:background = "#FFFFFFFF"
     android:focusableInTouchMode="true">
 
     <ImageButton
@@ -61,8 +62,8 @@
             android:id="@+id/writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/picture"
-            android:layout_marginTop="25dp"
+            android:layout_below="@id/contents"
+            android:layout_marginTop="44dp"
             android:fontFamily="@font/applesdgothicneob"
             android:text="홍길동"
             android:textColor="#000000"
@@ -83,9 +84,9 @@
             android:layout_height="150dp"
             android:layout_below="@id/title"
             android:layout_marginTop="20dp"
-            android:textColor="#000000"
             android:fontFamily="@font/applesdgothicneom"
             android:text="가나다라마바사아자차카타파하"
+            android:textColor="#000000"
             android:textSize="15sp" />
 
         <ImageView
@@ -103,9 +104,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/writer"
-            android:textColor="#000000"
             android:fontFamily="@font/applesdgothicneob"
             android:text="2022-07-09 14:00"
+            android:textColor="#000000"
             android:textSize="13sp" />
 
         <androidx.recyclerview.widget.RecyclerView

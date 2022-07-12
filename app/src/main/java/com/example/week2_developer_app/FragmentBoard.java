@@ -93,7 +93,7 @@ public class FragmentBoard extends Fragment {
         });
 
         binding.boardlistview.setHasFixedSize(true);
-        binding.boardlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
+//        binding.boardlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 
         adapterBoard = new AdapterBoard(boardList);
         binding.boardlistview.setLayoutManager(new LinearLayoutManager(getActivity()));

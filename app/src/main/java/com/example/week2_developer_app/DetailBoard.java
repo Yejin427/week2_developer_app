@@ -52,11 +52,9 @@ public class DetailBoard extends AppCompatActivity {
                 adapterComment.notifyDataSetChanged();
                 adapterComment = new AdapterComment(commentArrayList);
                 binding.commentRecyclerview.setAdapter(adapterComment);
-                Toast.makeText(getApplicationContext(), "댓글 불러오기 성공", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<ArrayList<Comment>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "댓글 불러오기 실패", Toast.LENGTH_SHORT).show();
                 Log.e("error: ", t.getMessage());
             }
         });
@@ -191,12 +189,12 @@ public class DetailBoard extends AppCompatActivity {
                     public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
                         CommentResponse result = response.body();
                         if(result.getCode() == 200){
-                            Toast.makeText(getApplicationContext(), "댓글 추가되었습니다.", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                     @Override
                     public void onFailure(Call<CommentResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "댓글 추가에 실패했습니다.", Toast.LENGTH_SHORT).show();
+
                         Log.e("error: ", t.getMessage());
                     }
                 });
