@@ -63,9 +63,20 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.commentV
         }
         void onBind(Comment comment){
             ((TextView)itemView.findViewById(R.id.contents)).setText(comment.getContents());
-            ((TextView)itemView.findViewById(R.id.date)).setText(comment.getRegData());
+            ((TextView)itemView.findViewById(R.id.date)).setText(parseRegData(comment.getRegData()));
             ((TextView)itemView.findViewById(R.id.writer)).setText(comment.getWriter());
         }
+
+
+    }
+
+    public String parseRegData(String regdata){
+        String year = regdata.substring(0, 4);
+        String month = regdata.substring(4, 6);
+        String day = regdata.substring(6, 8);
+        String hour = regdata.substring(8, 10);
+        String minute = regdata.substring(10, 12);
+        return month+"-"+day+" "+hour+":"+minute;
     }
 }
 interface OnCommentItemClickListener{

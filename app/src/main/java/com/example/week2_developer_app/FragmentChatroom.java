@@ -96,7 +96,7 @@ public class FragmentChatroom extends Fragment implements Listener {
         });
 
         binding.chatlistview.setHasFixedSize(true);
-        binding.chatlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
+//        binding.chatlistview.addItemDecoration(new DividerItemDecoration(rootView.getContext(), 1));
 
         adapter = new AdapterChatroom(chatroomlist);
         binding.chatlistview.setLayoutManager(new LinearLayoutManager(getActivity()));

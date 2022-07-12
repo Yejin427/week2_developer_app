@@ -16,14 +16,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <androidx.appcompat.widget.SearchView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/search_view"
-            android:layout_gravity="right"
-            app:iconifiedByDefault="true"
-            android:layoutDirection="rtl"/>
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            app:title="Board List">
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/search_view"
+                android:layout_gravity="right"
+                app:iconifiedByDefault="true"
+                android:layoutDirection="rtl"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -42,7 +52,8 @@
                 android:id="@+id/boardlistview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_board"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -53,11 +64,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/addbtn"
         android:src="@drawable/icon_add"
-        android:background="#ffffff"
+        android:background="#00000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="50dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintVertical_bias="0.85"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

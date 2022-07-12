@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="게시판"
+        android:textColor="#000000"
         android:fontFamily="@font/applesdgothicneob"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -51,10 +52,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
         app:layout_constraintBottom_toTopOf="@id/mycomment"
-        app:layout_constraintTop_toBottomOf="@id/back">
+        app:layout_constraintTop_toBottomOf="@id/back"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/writer"
@@ -64,23 +65,26 @@
             android:layout_marginTop="25dp"
             android:fontFamily="@font/applesdgothicneob"
             android:text="홍길동"
-            android:textSize="20sp" />
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/applesdgothicneob"
             android:text="제목"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/contents"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_below="@id/title"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/applesdgothicneob"
+            android:textColor="#000000"
+            android:fontFamily="@font/applesdgothicneom"
             android:text="가나다라마바사아자차카타파하"
             android:textSize="15sp" />
 
@@ -93,11 +97,13 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/writer"
+            android:textColor="#000000"
             android:fontFamily="@font/applesdgothicneob"
             android:text="2022-07-09 14:00"
             android:textSize="13sp" />
@@ -110,6 +116,7 @@
             android:layout_marginTop="20dp" />
 
     </RelativeLayout>
+
     <EditText
         android:id="@+id/mycomment"
         android:layout_width="match_parent"

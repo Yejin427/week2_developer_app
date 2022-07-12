@@ -90,7 +90,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHoldermy) holder).msg.setText(chatmsgs.get(position).getMsg());
             ((ViewHoldermy) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHoldermy) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
-            ((ViewHoldermy) holder).regdata.setText(chatmsgs.get(position).getRegdata());
+            ((ViewHoldermy) holder).regdata.setText(parseRegData(chatmsgs.get(position).getRegdata()));
             if(chatmsgs.get(position).getConnected() == 1)
                 ((ViewHoldermy) holder).imagebtn.setImageResource(R.drawable.icon_greendot);
 

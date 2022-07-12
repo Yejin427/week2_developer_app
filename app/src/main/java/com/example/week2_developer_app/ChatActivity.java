@@ -189,7 +189,7 @@ public class ChatActivity extends Activity {
         });
 
         binding.chatmsglistview.setHasFixedSize(true);
-        binding.chatmsglistview.addItemDecoration(new DividerItemDecoration(getApplicationContext(), 1));
+//        binding.chatmsglistview.addItemDecoration(new DividerItemDecoration(getApplicationContext(), 1));
         adapter = new AdapterChatmsg(chatmsglist);
         binding.chatmsglistview.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.chatmsglistview.setItemAnimator(new DefaultItemAnimator());
