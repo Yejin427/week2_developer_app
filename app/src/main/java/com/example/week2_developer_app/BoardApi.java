@@ -15,7 +15,7 @@ import retrofit2.http.PartMap;
 
 public interface BoardApi {
     @POST("/user/addboard")
-    Call<JoinBoardResponse.AddResponse> userAddBoard(@Body JoinBoardData.AddData data);
+    Call<ArrayList<JoinBoardData.DeleteData>> userAddBoard(@Body JoinBoardData.AddData data);
     @GET("/user/returnboards")
     Call<ArrayList<Board>> getBoard();
     @POST("/user/deleteboard")

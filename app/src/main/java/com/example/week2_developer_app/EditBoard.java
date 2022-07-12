@@ -1,6 +1,8 @@
 package com.example.week2_developer_app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -10,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
+import java.io.File;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class EditBoard extends AppCompatActivity {
     AddBoardBinding binding;
     private String pictureuri = null;   //image maybe added at board
     private Uri photoUri = null;
+    String mediaPath;
     private static final int GET_GALLERY_IMAGE = 0;
     BoardApi boardapi;
     @Override
@@ -89,26 +93,7 @@ public class EditBoard extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
                 //image server에 추가 -> 원격 이미지 주소 불러와서 객체에 저장
-                if(photoUri != null){
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), String.valueOf(photoUri));
-                    MultipartBody.Part img = MultipartBody.Part.createFormData("picture", String.valueOf(photoUri), requestFile);
 
-                    boardapi.uploadImage(img).enqueue(new Callback<JoinBoardResponse.PictureResponse>(){
-                        @Override
-                        public void onResponse(Call<JoinBoardResponse.PictureResponse> call, Response<JoinBoardResponse.PictureResponse> response) {
-                            JoinBoardResponse.PictureResponse result = response.body();
-                            pictureuri = result.getPictureUri();
-                            binding.picture.setImageURI(Uri.parse(pictureuri));
-                            binding.picture.setVisibility(View.VISIBLE);
-                        }
-                        @Override
-                        public void onFailure(Call<JoinBoardResponse.PictureResponse> call, Throwable t) {
-                            Toast.makeText(EditBoard.this, "게시글 업로드 에러", Toast.LENGTH_SHORT).show();
-                            Log.e("게시글 업로드 에러", t.getMessage());
-                            t.printStackTrace();
-                        }
-                    });
-                }
             }
         });
 
@@ -119,25 +104,54 @@ public class EditBoard extends AppCompatActivity {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String tts = timeToString(timestamp);
                 JoinBoardData.AddData addData = new JoinBoardData.AddData(email, name, type[0], binding.title.getText().toString(), binding.contents.getText().toString(), tts, pictureuri);
-                boardapi.userAddBoard(addData).enqueue(new Callback<JoinBoardResponse.AddResponse>(){
+
+
+                boardapi.userAddBoard(addData).enqueue(new Callback<ArrayList<JoinBoardData.DeleteData>>(){
                     @Override
-                    public void onResponse(Call<JoinBoardResponse.AddResponse> call, Response<JoinBoardResponse.AddResponse> response) {
-                        JoinBoardResponse.AddResponse result = response.body();
-                        if(result.getCode() == 200){
-                            Toast.makeText(EditBoard.this, "업로드에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                            finish();
+                    public void onResponse(Call<ArrayList<JoinBoardData.DeleteData>> call, Response<ArrayList<JoinBoardData.DeleteData>> response) {
+
+                        ArrayList<JoinBoardData.DeleteData> result = new ArrayList<>();
+                        result.addAll(response.body());
+                        response.body();
+                        Log.d("str", ""+result.get(0).getDoc_id());
+
+                        if(photoUri != null) {
+
+                            Log.d("확인" , mediaPath);
+                            File file = new File(mediaPath);
+
+                            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                            MultipartBody.Part img = MultipartBody.Part.createFormData("picture", "photo" + result.get(0).getDoc_id() + ".jpg", requestFile);
+
+                            boardapi.uploadImage(img).enqueue(new Callback<JoinBoardResponse.PictureResponse>() {
+                                @Override
+                                public void onResponse(Call<JoinBoardResponse.PictureResponse> call, Response<JoinBoardResponse.PictureResponse> response) {
+//                                    JoinBoardResponse.PictureResponse result = response.body();
+//                                    pictureuri = result.getPictureUri();
+//                                    binding.picture.setImageURI(Uri.parse(pictureuri));
+//                                    binding.picture.setVisibility(View.VISIBLE);
+                                }
+                                @Override
+                                public void onFailure(Call<JoinBoardResponse.PictureResponse> call, Throwable t) {
+                                    Toast.makeText(EditBoard.this, "게시글 업로드 에러", Toast.LENGTH_SHORT).show();
+                                    Log.e("게시글 업로드 에러", t.getMessage());
+                                    t.printStackTrace();
+                                }
+                            });
                         }
-                        else{
-                            Log.d("tag", "게시글 업로드 에러");
-                        }
+
+
+                        finish();
                     }
                     @Override
-                    public void onFailure(Call<JoinBoardResponse.AddResponse> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<JoinBoardData.DeleteData>> call, Throwable t) {
                         Toast.makeText(EditBoard.this, "게시글 업로드 에러", Toast.LENGTH_SHORT).show();
                         Log.e("게시글 업로드 에러", t.getMessage());
                         t.printStackTrace();
                     }
                 });
+
+
             }
         });
     }
@@ -152,6 +166,7 @@ public class EditBoard extends AppCompatActivity {
         return year+month+day+hour+minute+sec;
     }
     //갤러리 접근 ACTIVITY, 사진 선택
+    @SuppressLint("Range")
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -159,31 +174,26 @@ public class EditBoard extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 Bitmap bitmap = null;
                 photoUri = data.getData();
+                Log.d("확인", photoUri.toString());
+
+
+                String[] proj = {MediaStore.Images.Media.DATA};
+                Cursor cursor = managedQuery(photoUri, proj, null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+                mediaPath = cursor.getString(column_index);
+//                Cursor cursor = getContentResolver().query(Uri.parse(photoUri.toString()), null, null, null, null);
+//                assert cursor != null;
+//                cursor.moveToFirst();
+//                mediaPath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+
                 try{
                     InputStream in = getContentResolver().openInputStream(data.getData());
                     bitmap = BitmapFactory.decodeStream(in);
                     in.close();
                     binding.imageadd.setImageBitmap(bitmap);
 
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), String.valueOf(photoUri));
-                    MultipartBody.Part img = MultipartBody.Part.createFormData("picture", String.valueOf(photoUri), requestFile);
-
-                    boardapi.uploadImage(img).enqueue(new Callback<JoinBoardResponse.PictureResponse>(){
-                        @Override
-                        public void onResponse(Call<JoinBoardResponse.PictureResponse> call, Response<JoinBoardResponse.PictureResponse> response) {
-                            JoinBoardResponse.PictureResponse result = response.body();
-                            pictureuri = result.getPictureUri();
-                            binding.picture.setImageURI(Uri.parse(pictureuri));
-                            binding.picture.setVisibility(View.VISIBLE);
-                        }
-                        @Override
-                        public void onFailure(Call<JoinBoardResponse.PictureResponse> call, Throwable t) {
-                            Toast.makeText(EditBoard.this, "게시글 업로드 에러", Toast.LENGTH_SHORT).show();
-                            Log.e("게시글 업로드 에러", t.getMessage());
-                            t.printStackTrace();
-                        }
-                    });
-                }catch(Exception e){
+                }catch(Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -191,5 +201,6 @@ public class EditBoard extends AppCompatActivity {
                 Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
             }
         }
+
     }
 }

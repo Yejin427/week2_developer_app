@@ -7,9 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -96,8 +98,8 @@ public class DetailBoard extends AppCompatActivity {
         }
         else{
             //이미지 뷰 안보이게 하기
-            FrameLayout.LayoutParams pp = new FrameLayout.LayoutParams(0,0);
-            binding.picture.setLayoutParams(pp);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+            binding.picture.setLayoutParams(params);
         }
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -46,7 +46,9 @@ public class JoinBoardData {
         public DeleteData(int doc_id){
             this.doc_id = doc_id;
         }
+        public int getDoc_id(){ return doc_id; }
     }
+
 }
 
 class JoinBoardResponse {

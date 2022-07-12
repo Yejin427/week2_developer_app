@@ -123,7 +123,9 @@ public class AdapterBoard extends RecyclerView.Adapter<AdapterBoard.boardViewHol
             contents.setText(board.getContents().substring(0,1));
             regDate.setText(parseRegData(board.getRegdata()));
             writer.setText(board.getWriter());
-            imageView.setImageURI(Uri.parse(board.getPicture()));
+            if(board.getPicture() != null){
+                imageView.setImageURI(Uri.parse(board.getPicture()));
+            }
         }
 
         public String parseRegData(String regdata){
