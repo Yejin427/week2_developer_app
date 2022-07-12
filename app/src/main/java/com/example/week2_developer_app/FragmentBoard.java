@@ -115,7 +115,8 @@ public class FragmentBoard extends Fragment {
                 intent.putExtra("contents", curboard.getContents());
                 intent.putExtra("regdata", curboard.getRegdata());
                 intent.putExtra("likes", curboard.getLikes());
-
+                intent.putExtra("type", curboard.getType());
+                intent.putExtra("picture", curboard.getPicture());
                 intent.putExtra("useremail", email);
                 intent.putExtra("username", name);
                 startActivity(intent);

@@ -3,10 +3,13 @@ package com.example.week2_developer_app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +48,8 @@ public class DetailBoard extends AppCompatActivity {
         String writer_email = intent.getStringExtra("email");
         String contents = intent.getStringExtra("contents");
         String regdata = intent.getStringExtra("regdata");
-
+        String type = intent.getStringExtra("type");
+        String picture = intent.getStringExtra("picture");
         String username = intent.getStringExtra("username");
         String useremail = intent.getStringExtra("useremail");
         int likes = intent.getIntExtra("likes", 0);
@@ -54,6 +58,22 @@ public class DetailBoard extends AppCompatActivity {
         binding.title.setText(title);
         binding.contents.setText(contents);
         binding.date.setText(regdata);
+
+        if(type.equals("Question")){
+            binding.type.setText("질문게시판");
+        }
+        else if(type.equals("Info")){
+            binding.type.setText("정보게시판");
+        }
+
+        if(picture != null){
+            binding.picture.setImageURI(Uri.parse(picture));
+        }
+        else{
+            //이미지 뷰 안보이게 하기
+            FrameLayout.LayoutParams pp = new FrameLayout.LayoutParams(0,0);
+            binding.picture.setLayoutParams(pp);
+        }
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +85,6 @@ public class DetailBoard extends AppCompatActivity {
         if(!useremail.equals(writer_email)){
             binding.delete.setVisibility(View.GONE);
         }
-
 
         BoardApi boardApi = RetrofitClient.getClient().create(BoardApi.class);
 
