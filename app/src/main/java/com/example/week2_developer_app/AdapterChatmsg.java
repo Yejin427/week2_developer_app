@@ -25,6 +25,8 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<Chatmsg> chatmsgs_list = new ArrayList<Chatmsg>();
 
 
+
+
     public AdapterChatmsg(ArrayList<Chatmsg> myData){
         this.context = context;
         this.chatmsgs_filtered = myData;
@@ -90,7 +92,7 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHoldermy) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
             ((ViewHoldermy) holder).regdata.setText(chatmsgs.get(position).getRegdata());
             if(chatmsgs.get(position).getConnected() == 1)
-                ((ViewHoldermy) holder).imagebtn.setImageResource(R.drawable.icon_profile);
+                ((ViewHoldermy) holder).imagebtn.setImageResource(R.drawable.icon_greendot);
 
         }
         else {
@@ -98,10 +100,19 @@ public class AdapterChatmsg extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHolderoppo) holder).msg.setText(chatmsgs.get(position).getMsg());
             ((ViewHolderoppo) holder).name.setText(chatmsgs.get(position).getSender_name());
             ((ViewHolderoppo) holder).chat_id.setText(Integer.toString(chatmsgs.get(position).getChat_id()));
-            ((ViewHolderoppo) holder).regdata.setText(chatmsgs.get(position).getRegdata());
+            ((ViewHolderoppo) holder).regdata.setText(parseRegData(chatmsgs.get(position).getRegdata()));
             if(chatmsgs.get(position).getConnected() == 1)
-                ((ViewHolderoppo) holder).imagebtn.setImageResource(R.drawable.icon_profile);
+                ((ViewHolderoppo) holder).imagebtn.setImageResource(R.drawable.icon_greendot);
         }
+    }
+
+    public String parseRegData(String regdata){
+        String year = regdata.substring(0, 4);
+        String month = regdata.substring(4, 6);
+        String day = regdata.substring(6, 8);
+        String hour = regdata.substring(8, 10);
+        String minute = regdata.substring(10, 12);
+        return month+"-"+day+" "+hour+":"+minute;
     }
 
     @Override

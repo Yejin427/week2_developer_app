@@ -179,19 +179,18 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.ViewHold
         void onBind(Project project, int viewtype) {
 
             if(viewtype == 1) {
-                imagebtn.setImageResource(R.drawable.icon_bin);
+                imagebtn.setVisibility(View.VISIBLE);
                 viewType.setText(Integer.toString(viewtype));
             }
-            //Log.d("str", ""+project.getproj_id());
             project_id.setText(Integer.toString(project.getproj_id()));
             title.setText(project.gettitle());
-            field.setText(project.getfield());
-            language.setText(project.getlanguage());
-            level.setText(Integer.toString(project.getlevel()));
-            headcount.setText(Integer.toString(project.getheadcount()));
+            field.setText("개발분야 : " + project.getfield());
+            language.setText("개발언어 : " + project.getlanguage());
+            level.setText("개발 수준 : " + Integer.toString(project.getlevel()));
+            headcount.setText("모집 인원 : " + Integer.toString(project.getheadcount()) + "명");
             String prd = parseRegData(project.getregdata());
             regdata.setText(prd);
-            writer.setText(project.getwriter());
+            writer.setText("작성자 : " + project.getwriter());
         }
         public String parseRegData(String regdata){
             String year = regdata.substring(0, 4);

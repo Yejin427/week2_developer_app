@@ -166,44 +166,7 @@ public class FragmentProject extends Fragment implements Listener {
                 getmyProjectlist(1);
                 binding.deletebtn.setVisibility(View.INVISIBLE);
                 binding.backbtn.setVisibility(View.VISIBLE);
-                adapter.setOnItemClicklistener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterProject.ViewHolder holder, View v, int pos) {
-                        Listener listener2 = new Listener() {
-                            @Override
-                            public void returnyes(String str) {
-                                Log.d("str", str);
-                                Log.d("str", holder.project_id.getText().toString());
-                                int proj_id = Integer.parseInt(holder.project_id.getText().toString());
-
-                                ProjectApi service = RetrofitClient.getClient().create(ProjectApi.class);
-                                Project_deleteData data = new Project_deleteData(proj_id);
-                                Log.d("확인", ""+proj_id);
-
-                                service.deleteProject(data).enqueue(new Callback<ProjectResponse>(){
-                                    @Override
-                                    public void onResponse(Call<ProjectResponse> call, Response<ProjectResponse> response) {
-                                        ProjectResponse result = response.body();
-                                        if(result.getCode() == 200) {
-                                            Log.d("확인", ""+result.getCode());
-                                            getmyProjectlist(1);
-                                        }
-                                    }
-                                    @Override
-                                    public void onFailure(Call<ProjectResponse> call, Throwable t) {
-                                        Log.d("실패", "실패");
-                                    }
-                                });
-                            }
-                        };
-
-                        if(holder.viewType.getText().toString().equals("1")) {
-                            DialogProjectdelete dialog = new DialogProjectdelete(getContext(), listener2);
-                            dialog.showDialog();
-                        }
-
-                    }
-                });
+                binding.topAppBar.setTitle("My Projects");
             }
         });
 
@@ -237,6 +200,7 @@ public class FragmentProject extends Fragment implements Listener {
                         startActivity(intent);
                     }
                 });
+                binding.topAppBar.setTitle("Project List");
             }
         });
 
@@ -246,6 +210,9 @@ public class FragmentProject extends Fragment implements Listener {
     @Override
     public void onResume() {
         super.onResume();
+        binding.deletebtn.setVisibility(View.VISIBLE);
+        binding.backbtn.setVisibility(View.INVISIBLE);
+        binding.topAppBar.setTitle("Project List");
         getProjectlist(0);
     }
 
@@ -257,6 +224,7 @@ public class FragmentProject extends Fragment implements Listener {
         name = this.getArguments().getString("name");
         email = this.getArguments().getString("email");
         binding = FragmentProjectBinding.inflate(getLayoutInflater());
+        binding.topAppBar.setTitle("Project List");
     }
 
     @Override

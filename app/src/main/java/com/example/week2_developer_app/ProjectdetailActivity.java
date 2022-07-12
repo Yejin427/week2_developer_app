@@ -26,6 +26,15 @@ public class ProjectdetailActivity extends AppCompatActivity {
     private ImageButton btn_delete;
     private String name;
     private String email;
+    private String title;
+    public String parseRegData(String regdata){
+        String year = regdata.substring(0, 4);
+        String month = regdata.substring(4, 6);
+        String day = regdata.substring(6, 8);
+        String hour = regdata.substring(8, 10);
+        String minute = regdata.substring(10, 12);
+        return year+"-"+month+"-"+day+" "+hour+":"+minute;
+    }
 
     ActivityDetailprojectBinding binding;
     private String convertTimestampTodate(long time){
@@ -44,7 +53,7 @@ public class ProjectdetailActivity extends AppCompatActivity {
 
         name = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("email");
-
+        title = getIntent().getStringExtra("title");
         int proj_id = intent.getIntExtra("proj_id" , 0);
         //binding.projId.setText(Integer.toString(intent.getIntExtra("proj_id" , 0)));
         binding.writer.setText(intent.getStringExtra("writer"));
@@ -56,7 +65,8 @@ public class ProjectdetailActivity extends AppCompatActivity {
         binding.headcount.setText(Integer.toString(intent.getIntExtra("headcount", 0)));
         binding.language.setText(intent.getStringExtra("language"));
         binding.time.setText(intent.getStringExtra("time"));
-        binding.regdata.setText(intent.getStringExtra("regdata"));
+        binding.regdata.setText(parseRegData(intent.getStringExtra("regdata")));
+        binding.topAppBar.setTitle("Project Detail");
 
         if(email.equals(intent.getStringExtra("writer_email")))
             binding.btnDelete.setVisibility(View.VISIBLE);
@@ -89,13 +99,14 @@ public class ProjectdetailActivity extends AppCompatActivity {
                         if(response.body().getCode() == 404) {
                             intent.putExtra("type", "new");
                             intent.putExtra("regdata", regdata);
-                            intent.putExtra("chat_name", intent.getStringExtra("title"));
+                            intent.putExtra("chat_name", title);
                         }
                         else{
                             intent.putExtra("type", "no");
                             intent.putExtra("regdata", "old");
-                            intent.putExtra("chat_name", intent.getStringExtra("title"));
+                            intent.putExtra("chat_name", title);
                         }
+
                         startActivity(intent);
                     }
                     @Override

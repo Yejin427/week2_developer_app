@@ -161,8 +161,17 @@ public class AdapterChatroom extends RecyclerView.Adapter<AdapterChatroom.ViewHo
             chat_id.setText(Integer.toString(chatroom.getChat_id()));
             chat_name.setText(chatroom.getChat_name());
             lastchat.setText(chatroom.getLastchat());
-            regdata.setText(chatroom.getRegdata());
+            regdata.setText(parseRegData(chatroom.getRegdata()));
 
+        }
+
+        public String parseRegData(String regdata){
+            String year = regdata.substring(0, 4);
+            String month = regdata.substring(4, 6);
+            String day = regdata.substring(6, 8);
+            String hour = regdata.substring(8, 10);
+            String minute = regdata.substring(10, 12);
+            return month+"-"+day+" "+hour+":"+minute;
         }
     }
     public void setItems(ArrayList<Chatroom> chatrooms){

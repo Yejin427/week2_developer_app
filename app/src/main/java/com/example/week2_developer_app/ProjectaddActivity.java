@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +19,7 @@ import retrofit2.Response;
 
 public class ProjectaddActivity extends AppCompatActivity {
 
-    private Button projectaddbtn;
+    private ImageButton projectaddbtn;
     private String name;
     private String email;
 
@@ -35,9 +37,16 @@ public class ProjectaddActivity extends AppCompatActivity {
 
         name = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("email");
+        projectaddbtn = (ImageButton) findViewById(R.id.btn_add);
 
-        projectaddbtn = (Button) findViewById(R.id.projectaddbtn);
+        ((TextView) findViewById(R.id.writer)).setText(name);
 
+        ((ImageButton) findViewById(R.id.btn_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         projectaddbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
