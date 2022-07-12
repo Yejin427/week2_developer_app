@@ -139,8 +139,6 @@ public class EditBoard extends AppCompatActivity {
                                 }
                             });
                         }
-
-
                         finish();
                     }
                     @Override
@@ -150,8 +148,6 @@ public class EditBoard extends AppCompatActivity {
                         t.printStackTrace();
                     }
                 });
-
-
             }
         });
     }
@@ -175,13 +171,11 @@ public class EditBoard extends AppCompatActivity {
                 Bitmap bitmap = null;
                 photoUri = data.getData();
                 Log.d("확인", photoUri.toString());
-
-
-                String[] proj = {MediaStore.Images.Media.DATA};
-                Cursor cursor = managedQuery(photoUri, proj, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                mediaPath = cursor.getString(column_index);
+                String[] proj = { MediaStore.Images.Media.DATA };
+                Cursor cursor = getContentResolver().query(photoUri, proj, null, null, null);
+                cursor.moveToNext();
+                mediaPath = cursor.getString(cursor.getColumnIndex("_data"));
+                cursor.close();
 //                Cursor cursor = getContentResolver().query(Uri.parse(photoUri.toString()), null, null, null, null);
 //                assert cursor != null;
 //                cursor.moveToFirst();
