@@ -11,6 +11,7 @@
     <img src="https://i.imgur.com/iMfVlBH.jpg" height="32%" width="32%">
     <br><br><br>
 </p>
+
 ## 개발자
 > * [김상엽](https://github.com/beoygnas) : 고려대학교 컴퓨터학과 18학번 
 > * [조예진](https://github.com/Yejin427) : 한양대학교 컴퓨터소프트웨어학부 20학번
