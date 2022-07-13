@@ -91,14 +91,14 @@ public class DetailBoard extends AppCompatActivity {
             binding.type.setText("정보게시판");
         }
 
-        if(picture != null){
-            binding.picture.setImageURI(Uri.parse(picture));
-        }
-        else{
-            //이미지 뷰 안보이게 하기
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 0);
-            binding.picture.setLayoutParams(params);
-        }
+//        if(picture != null){
+//            binding.picture.setImageURI(Uri.parse(picture));
+//        }
+//        else{
+//            //이미지 뷰 안보이게 하기
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+//            binding.picture.setLayoutParams(params);
+//        }
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

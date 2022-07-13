@@ -175,17 +175,15 @@ public class EditBoard extends AppCompatActivity {
                 Bitmap bitmap = null;
                 photoUri = data.getData();
                 Log.d("확인", photoUri.toString());
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-
-                String[] proj = {MediaStore.Images.Media.DATA};
-                Cursor cursor = managedQuery(photoUri, proj, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                Cursor cursor = getContentResolver().query(
+                        photoUri, filePathColumn, null, null, null);
                 cursor.moveToFirst();
-                mediaPath = cursor.getString(column_index);
-//                Cursor cursor = getContentResolver().query(Uri.parse(photoUri.toString()), null, null, null, null);
-//                assert cursor != null;
-//                cursor.moveToFirst();
-//                mediaPath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                mediaPath = cursor.getString(columnIndex);
+                cursor.close();
 
                 try{
                     InputStream in = getContentResolver().openInputStream(data.getData());

@@ -52,7 +52,8 @@
         <activity android:name=".ProjectaddActivity"
             android:theme = "@style/Theme.AppCompat.NoActionBar">
         </activity>
-        <activity android:name=".EditBoard"></activity>
+        <activity android:name=".EditBoard"
+            android:theme = "@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".DetailBoard"
             android:theme = "@style/Theme.AppCompat.NoActionBar">
             android:windowSoftInputMode ="adjustPan"></activity>
